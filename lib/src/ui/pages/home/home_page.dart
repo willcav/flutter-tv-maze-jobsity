@@ -15,16 +15,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late final ScrollController controller;
   @override
   void initState() {
     super.initState();
 
     widget.presenter.getAllSeries();
+    controller = ScrollController();
   }
 
   @override
   Widget build(BuildContext context) {
-    final controller = ScrollController();
     return Scaffold(
         backgroundColor: AppColors.grey,
         appBar: HomeSlidingAppBar(scrollController: controller),
@@ -66,7 +67,8 @@ class _HomePageState extends State<HomePage> {
       crossAxisSpacing: 16,
       itemCount: list.length,
       itemBuilder: (context, index) {
-        return HomeSeriesCard(index: index, seriesInfoItem: list[index]);
+        return HomeSeriesCard(
+            key: ValueKey(index), index: index, seriesInfoItem: list[index]);
       },
     );
   }

@@ -9,7 +9,7 @@ class RatingModel extends RatingEntity {
 
   factory RatingModel.fromMap(Map<String, dynamic> map) {
     return RatingModel(
-      dtoAverage: (map['average'] ?? '').toString(),
+      dtoAverage: (map['average'] ?? '-').toString(),
     );
   }
 }
