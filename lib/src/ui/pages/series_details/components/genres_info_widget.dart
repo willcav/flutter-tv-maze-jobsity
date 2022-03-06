@@ -11,6 +11,10 @@ class GenresInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (genres.genres.isEmpty) {
+      return const SizedBox();
+    }
+
     return Wrap(
         children: genres.genres.map((item) => buildGenreItem(item)).toList());
   }
