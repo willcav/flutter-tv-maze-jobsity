@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../dependency_injection/factories/pages/search_series_page_factory.dart';
 import '../dependency_injection/factories/pages/episode_details_page_factory.dart';
 import '../dependency_injection/factories/pages/main_navigation_page_factory.dart';
 import '../dependency_injection/factories/pages/series_details_page_factory.dart';
@@ -12,5 +13,6 @@ class AppPages {
     GetPage(name: AppRoutes.mainNavigationPage, page: makeMainNavigationPage),
     GetPage(name: AppRoutes.seriesDetailsPage, page: makeSeriesDetailsPage),
     GetPage(name: AppRoutes.episodeDetailsPage, page: makeEpisodeDetailsPage),
+    GetPage(name: AppRoutes.searchSeriesPage, page: makeSearchSeriesPage),
   ];
 }

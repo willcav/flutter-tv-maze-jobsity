@@ -92,36 +92,7 @@ mixin AppTheme {
 
   static InputDecorationTheme inputDecorationTheme(ColorScheme colorScheme) {
     return InputDecorationTheme(
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8.0),
-        borderSide: BorderSide(
-          color: colorScheme.onBackground.withAlpha(80),
-        ),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8.0),
-        borderSide: BorderSide(
-          color: colorScheme.error,
-        ),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8.0),
-        borderSide: BorderSide(
-          color: colorScheme.onBackground.withAlpha(200),
-        ),
-      ),
-      disabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8.0),
-        borderSide: BorderSide(
-          color: colorScheme.onBackground.withAlpha(40),
-        ),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8.0),
-        borderSide: BorderSide(
-          color: colorScheme.error,
-        ),
-      ),
+      border: InputBorder.none,
       labelStyle: _textTheme.bodyText1,
       hintStyle: _textTheme.subtitle1?.copyWith(
         color: colorScheme.onBackground.withAlpha(40),

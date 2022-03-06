@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_tv_maze_jobsity/src/ui/themes/app_colors.dart';
+import '../../../../routes/app_routes.dart';
+import '../../../themes/app_colors.dart';
+import 'package:get/get.dart';
 
 class HomeSlidingAppBar extends StatefulWidget implements PreferredSizeWidget {
   final ScrollController scrollController;
@@ -64,10 +66,15 @@ class _SlidingAppBarState extends State<HomeSlidingAppBar>
         ),
         actions: [
           IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.search,
-                color: AppColors.black,
+              onPressed: () {
+                Get.toNamed(AppRoutes.searchSeriesPage);
+              },
+              icon: const Hero(
+                tag: '-searchIcon-',
+                child: Icon(
+                  Icons.search,
+                  color: AppColors.black,
+                ),
               )),
         ],
       ),

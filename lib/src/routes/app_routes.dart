@@ -4,4 +4,6 @@ class AppRoutes {
   static const seriesDetailsPage = '/series/details';
 
   static const episodeDetailsPage = '/episode/details';
+
+  static const searchSeriesPage = '/home/search-series';
 }
