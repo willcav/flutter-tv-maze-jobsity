@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tv_maze_jobsity/src/ui/pages/series_details/components/series_details_sliding_app_bar.dart';
 import 'package:get/get.dart';
 
+import '../../../presentation/presenters/series_details_presenter/series_details_presenter.dart';
+import '../shared/components/image_widget.dart';
+import 'components/seasons_info_widget.dart';
+import 'components/series_details_content.dart';
+import 'components/series_details_sliding_app_bar.dart';
+
+import '../../../domain/entities/get_series_details/series_detailed_info_entity.dart';
 import '../../../domain/entities/list_all_series/series_basic_info_entity.dart';
 import '../../themes/app_colors.dart';
 
 class SeriesDetailsPage extends StatefulWidget {
-  const SeriesDetailsPage({Key? key}) : super(key: key);
+  final SeriesDetailsPresenter presenter;
+  const SeriesDetailsPage({
+    Key? key,
+    required this.presenter,
+  }) : super(key: key);
 
   @override
   State<SeriesDetailsPage> createState() => _SeriesDetailsPageState();
@@ -22,6 +32,10 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
 
     controller = ScrollController();
     seriesInfo = getNavigationArguments(argumentKey: 'seriesInfo');
+
+    widget.presenter.getSeriesDetails(
+      seriesId: seriesInfo != null ? seriesInfo!.id : '',
+    );
   }
 
   T? getNavigationArguments<T>({required String argumentKey}) {
@@ -56,93 +70,41 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
                 background: seriesInfo != null
                     ? Hero(
                         tag: seriesInfo!.id,
-                        child: Image.network(
-                          seriesInfo!.image.original,
-                          fit: BoxFit.fitWidth,
-                        ),
+                        child: ImageWidget(
+                            imageNetworkPath: seriesInfo!.image.original),
                       )
                     : const SizedBox()),
           ),
           SliverList(
               delegate: SliverChildListDelegate([
-            const Padding(
-              padding: EdgeInsets.all(64),
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            )
-            // Padding(
-            //   padding: const EdgeInsets.all(16),
-            //   child: Column(
-            //     crossAxisAlignment: CrossAxisAlignment.start,
-            //     children: [
-            //       Text(
-            //         seriesInfo!.name,
-            //         style: Theme.of(context).textTheme.headline1,
-            //       ),
-            //       const SizedBox(
-            //         height: 8,
-            //       ),
-            //       Row(
-            //         children: const [
-            //           Text('Drama'),
-            //           SizedBox(
-            //             width: 8,
-            //           ),
-            //           Text('Action'),
-            //           SizedBox(
-            //             width: 8,
-            //           ),
-            //           Text('Crime'),
-            //         ],
-            //       ),
-            //       const SizedBox(
-            //         height: 8,
-            //       ),
-            //       const Text(
-            //           "New jobs are tough—especially when your new employer is the CIA. Annie Walker is fluent in six languages, has traveled the world and is besting her fellow CIA trainees in every test. But that doesn't explain why she's suddenly summoned by CIA headquarters to report for active duty as a field operative one month before her training is over. She doesn't know there may be something—or someone—from her past that her CIA bosses are really after.<br><br> Annie's unofficial guide to the CIA is Auggie Anderson, a tech ops expert who was blinded while on assignment. As Annie navigates this new world of intrigue, danger and bureaucratic red tape, Auggie is there to make sure this quick study won't be kept in the dark for long. Also starring Peter Gallagher, Kari Matchett, Sendhil Ramamurthy and Anne Dudek"),
-            //       Text.rich(
-            //         TextSpan(
-            //           style: Theme.of(context).textTheme.subtitle1,
-            //           children: const [
-            //             TextSpan(text: '22:00'),
-            //             TextSpan(
-            //               text: '  ·  ',
-            //             ),
-            //             TextSpan(
-            //               text: 'Thursday',
-            //             ),
-            //             TextSpan(
-            //               text: '  ·  ',
-            //             ),
-            //             TextSpan(
-            //               text: 'Ended',
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //       const SizedBox(
-            //         height: 8,
-            //       ),
-            //       const Text('Season 1'),
-            //       SizedBox(
-            //         height: 200,
-            //         child: ListView.separated(
-            //           physics: const BouncingScrollPhysics(),
-            //           scrollDirection: Axis.horizontal,
-            //           itemCount: 10,
-            //           itemBuilder: (context, index) => Image.network(
-            //             seriesInfo!.image.medium,
-            //             fit: BoxFit.fitWidth,
-            //           ),
-            //           separatorBuilder: (context, index) => const SizedBox(
-            //             width: 8,
-            //           ),
-            //         ),
-            //       )
-            //     ],
-            //   ),
-            // )
+            StreamBuilder<SeriesDetailedInfoEntity?>(
+                stream: widget.presenter.seriesDetailsStream,
+                builder: (context, streamSnapshot) {
+                  if (streamSnapshot.hasData && streamSnapshot.data != null) {
+                    return Column(
+                      children: [
+                        SeriesDetailsContent(
+                          seriesDetails: streamSnapshot.data!,
+                        ),
+                        SeasonsInfoWidget(
+                            seasons: streamSnapshot.data!.seasons),
+                      ],
+                    );
+                  } else if (streamSnapshot.hasError) {
+                    return const Padding(
+                      padding: EdgeInsets.all(64),
+                      child: Center(
+                        child: Text('Something Wrong Happened'),
+                      ),
+                    );
+                  }
+                  return const Padding(
+                    padding: EdgeInsets.all(64),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                })
           ])),
         ],
       ),
