@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_tv_maze_jobsity/src/presentation/presenters/search_series_presenter/search_series_presenter.dart';
 
 import '../../../domain/entities/list_all_series/series_basic_info_entity.dart';
 import '../../themes/app_colors.dart';
 import '../home/components/home_series_card.dart';
 
 class SearchSeriesPage extends StatefulWidget {
-  const SearchSeriesPage({Key? key}) : super(key: key);
+  final SearchSeriesPresenter presenter;
+  const SearchSeriesPage({
+    Key? key,
+    required this.presenter,
+  }) : super(key: key);
 
   @override
   State<SearchSeriesPage> createState() => _SearchSeriesPageState();
@@ -38,6 +43,7 @@ class _SearchSeriesPageState extends State<SearchSeriesPage> {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: StreamBuilder<List<SeriesBasicInfoEntity>>(
             initialData: const [],
+            stream: widget.presenter.seriesListStream,
             builder: (context, listSnapshot) {
               if (listSnapshot.hasData && listSnapshot.data!.isNotEmpty) {
                 return buildList(
@@ -46,7 +52,7 @@ class _SearchSeriesPageState extends State<SearchSeriesPage> {
               } else if (listSnapshot.hasData && listSnapshot.data!.isEmpty) {
                 return Center(
                   child: Text(
-                    'Search Tv Shows by Name 😁',
+                    'Search TV Shows 😁',
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
@@ -56,7 +62,7 @@ class _SearchSeriesPageState extends State<SearchSeriesPage> {
                 );
               } else if (listSnapshot.hasError) {
                 return const Center(
-                  child: Text('Something wrong happened :('),
+                  child: Text('Something wrong happened 😞'),
                 );
               }
 
