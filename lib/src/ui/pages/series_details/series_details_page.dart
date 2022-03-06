@@ -69,7 +69,7 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
                 ],
                 background: seriesInfo != null
                     ? Hero(
-                        tag: seriesInfo!.id,
+                        tag: '${seriesInfo!.id}${seriesInfo!.name}',
                         child: ImageWidget(
                             imageNetworkPath: seriesInfo!.image.original),
                       )

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tv_maze_jobsity/src/domain/entities/core/episode_entity.dart';
+import 'package:flutter_tv_maze_jobsity/src/routes/app_routes.dart';
 import 'package:flutter_tv_maze_jobsity/src/ui/pages/shared/components/image_widget.dart';
+import 'package:get/get.dart';
 
 import '../../../themes/app_colors.dart';
 
@@ -16,7 +18,12 @@ class EpisodeCard extends StatelessWidget {
     return SizedBox(
       width: 250,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Get.toNamed(
+            AppRoutes.episodeDetailsPage,
+            arguments: {'episode': episode},
+          );
+        },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -31,7 +38,7 @@ class EpisodeCard extends StatelessWidget {
                   color: AppColors.grey1,
                 ),
                 child: Hero(
-                  tag: episode.id,
+                  tag: '${episode.id}${episode.name}',
                   child: ImageWidget(imageNetworkPath: episode.image.medium),
                 ),
               ),
