@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_tv_maze_jobsity/src/presentation/presenters/search_series_presenter/search_series_presenter.dart';
+import 'package:flutter_tv_maze_jobsity/src/ui/pages/search_series/components/search_series_app_bar.dart';
 
 import '../../../domain/entities/list_all_series/series_basic_info_entity.dart';
 import '../../themes/app_colors.dart';
@@ -22,53 +23,47 @@ class _SearchSeriesPageState extends State<SearchSeriesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.grey,
-      appBar: AppBar(
-        foregroundColor: AppColors.black,
-        backgroundColor: AppColors.grey,
-        title: TextField(
-          autofocus: true,
-          style: Theme.of(context).textTheme.bodyText1,
-          decoration: const InputDecoration(
-              suffixIcon: Hero(
-            tag: '-searchIcon-',
-            child: Icon(
-              Icons.search,
-              color: AppColors.black,
-            ),
-          )),
-        ),
-        elevation: 0,
-      ),
+      appBar: SearchSeriesAppBar(onChanged: widget.presenter.searchSeries),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: StreamBuilder<List<SeriesBasicInfoEntity>>(
             initialData: const [],
             stream: widget.presenter.seriesListStream,
             builder: (context, listSnapshot) {
-              if (listSnapshot.hasData && listSnapshot.data!.isNotEmpty) {
-                return buildList(
-                  list: listSnapshot.data!,
-                );
-              } else if (listSnapshot.hasData && listSnapshot.data!.isEmpty) {
-                return Center(
-                  child: Text(
-                    'Search TV Shows 😁',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline1!
-                        .copyWith(fontWeight: FontWeight.w300),
-                  ),
-                );
-              } else if (listSnapshot.hasError) {
-                return const Center(
-                  child: Text('Something wrong happened 😞'),
-                );
-              }
+              return StreamBuilder(
+                  stream: widget.presenter.isLoadingStream,
+                  initialData: false,
+                  builder: (context, loadingSnapshot) {
+                    if (loadingSnapshot.hasData &&
+                        loadingSnapshot.data == false) {
+                      if (listSnapshot.hasData &&
+                          listSnapshot.data!.isNotEmpty) {
+                        return buildList(
+                          list: listSnapshot.data!,
+                        );
+                      } else if (listSnapshot.hasData &&
+                          listSnapshot.data!.isEmpty) {
+                        return Center(
+                          child: Text(
+                            'Search TV Shows 😁',
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline1!
+                                .copyWith(fontWeight: FontWeight.w300),
+                          ),
+                        );
+                      } else if (listSnapshot.hasError) {
+                        return const Center(
+                          child: Text('Something wrong happened 😞'),
+                        );
+                      }
+                    }
 
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  });
             }),
       ),
     );

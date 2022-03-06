@@ -25,8 +25,7 @@ class RemoteSearchSeriesByName implements SearchSeriesByNameUseCase {
           url: url, method: RequestMethod.get, queryParameters: queryParams);
 
       final seriesListResult = (result as List)
-          .map((item) =>
-              SeriesBasicInfoModel.fromMap(item as Map<String, dynamic>))
+          .map((item) => SeriesBasicInfoModel.fromMap(item['show']))
           .toList();
 
       return seriesListResult;
