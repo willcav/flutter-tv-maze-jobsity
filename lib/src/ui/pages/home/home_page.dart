@@ -73,32 +73,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-class Tile extends StatelessWidget {
-  const Tile({
-    Key? key,
-    required this.index,
-    this.extent,
-  }) : super(key: key);
-
-  final int index;
-  final double? extent;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: index == 0 || index == 1 ? 32 : 0),
-      color: AppColors.grey1,
-      height: extent,
-      child: Center(
-        child: CircleAvatar(
-          minRadius: 20,
-          maxRadius: 20,
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
-          child: Text('$index', style: const TextStyle(fontSize: 20)),
-        ),
-      ),
-    );
-  }
-}

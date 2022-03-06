@@ -38,7 +38,7 @@ class HomeSeriesCard extends StatelessWidget {
                   color: AppColors.grey1,
                 ),
                 child: Hero(
-                  tag: seriesInfoItem.id,
+                  tag: '${seriesInfoItem.id}${seriesInfoItem.name}',
                   child: ImageWidget(
                     imageNetworkPath: seriesInfoItem.image.medium,
                   ),
