@@ -9,6 +9,14 @@ class SummaryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (text.isEmpty) {
+      return Text(
+        'No summary available.',
+        style: Theme.of(context).textTheme.bodyText1,
+        textAlign: TextAlign.justify,
+      );
+    }
+
     return Text(
       _removeHtmlTags(text),
       style: Theme.of(context).textTheme.bodyText1,
