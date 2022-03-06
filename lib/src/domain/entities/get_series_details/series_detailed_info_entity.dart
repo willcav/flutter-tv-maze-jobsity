@@ -15,6 +15,7 @@ class SeriesDetailedInfoEntity {
   final ScheduleInfoEntity schedule;
   final String summary;
   final List<SeasonEntity> seasons;
+  final String status;
 
   const SeriesDetailedInfoEntity({
     required this.id,
@@ -26,5 +27,6 @@ class SeriesDetailedInfoEntity {
     required this.schedule,
     required this.summary,
     required this.seasons,
+    required this.status,
   });
 }
