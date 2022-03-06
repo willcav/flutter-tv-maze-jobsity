@@ -45,4 +45,5 @@ flutter:
   assets:
     - assets/icons/
     - assets/fonts/rubik/
+    - assets/images/
 

@@ -7,11 +7,11 @@ import 'package:flutter_tv_maze_jobsity/src/domain/entities/get_series_details/s
 import 'package:flutter_tv_maze_jobsity/src/domain/errors/domain_error.dart';
 import 'package:flutter_tv_maze_jobsity/src/domain/use_cases/fetch_series_details/fetch_series_details_use_case.dart';
 
-class RemoteFetchSeriesDetailsUseCase implements FetchSeriesDetailsUseCase {
+class RemoteFetchSeriesDetails implements FetchSeriesDetailsUseCase {
   final HttpClient client;
   final String url;
 
-  const RemoteFetchSeriesDetailsUseCase({
+  const RemoteFetchSeriesDetails({
     required this.client,
     required this.url,
   });
