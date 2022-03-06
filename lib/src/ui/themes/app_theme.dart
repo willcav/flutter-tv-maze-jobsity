@@ -148,6 +148,12 @@ mixin AppTheme {
       fontSize: 16,
       fontWeight: _bold,
     ),
+    headline3: TextStyle(
+      color: AppColors.black,
+      fontFamily: 'Rubik',
+      fontSize: 20,
+      fontWeight: _bold,
+    ),
     bodyText1: TextStyle(
       color: AppColors.black,
       fontFamily: 'Rubik',
