@@ -15,6 +15,7 @@ class SeriesDetailedInfoModel extends SeriesDetailedInfoEntity {
   final ScheduleInfoModel scheduleModel;
   final String dtoSummary;
   final List<SeasonModel> seasonsModel;
+  final String dtoStatus;
 
   SeriesDetailedInfoModel({
     required this.dtoId,
@@ -26,6 +27,7 @@ class SeriesDetailedInfoModel extends SeriesDetailedInfoEntity {
     required this.scheduleModel,
     required this.dtoSummary,
     required this.seasonsModel,
+    required this.dtoStatus,
   }) : super(
           id: dtoId,
           name: dtoName,
@@ -36,6 +38,7 @@ class SeriesDetailedInfoModel extends SeriesDetailedInfoEntity {
           schedule: scheduleModel,
           summary: dtoSummary,
           seasons: seasonsModel,
+          status: dtoStatus,
         );
 
   factory SeriesDetailedInfoModel.fromMap(Map<String, dynamic> map) {
@@ -54,6 +57,7 @@ class SeriesDetailedInfoModel extends SeriesDetailedInfoEntity {
       scheduleModel: ScheduleInfoModel.fromMap(map['schedule'] ?? {}),
       dtoSummary: (map['summary'] ?? '').toString(),
       seasonsModel: seasons,
+      dtoStatus: (map['status'] ?? '').toString(),
     );
   }
 
@@ -85,41 +89,4 @@ class SeriesDetailedInfoModel extends SeriesDetailedInfoEntity {
 
     return sortedEpisodes;
   }
-
-  /*
-  
-    {
-      "1": {
-      "season": 1,
-      "episodes": [
-        {
-          "id": 32352,
-          "url": "https://www.tvmaze.com/episodes/32352/covert-affairs-1x01-pilot",
-          "name": "Pilot",
-          "season": 1,
-          "number": 1,
-          "type": "regular",
-          "airdate": "2010-07-13",
-          "airtime": "22:00",
-          "airstamp": "2010-07-14T02:00:00+00:00",
-          "runtime": 60,
-          "rating": {
-            "average": 8.3
-          },
-          "image": {
-            "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/255/639143.jpg",
-            "original": "https://static.tvmaze.com/uploads/images/original_untouched/255/639143.jpg"
-          },
-          "summary": "<p>Annie Walker is removed from CIA training and thrust into the inner sanctum of the Agency for what appears to be their need of her exceptional linguistic skills, but there may be something or someone from her past that her CIA bosses are really after.</p>",
-          "_links": {
-            "self": {
-              "href": "https://api.tvmaze.com/episodes/32352"
-            }
-          }
-        },
-      ]
-    }
-    }
-  
-   */
 }
