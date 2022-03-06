@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tv_maze_jobsity/src/domain/entities/get_series_details/series_detailed_info_entity.dart';
-import 'package:flutter_tv_maze_jobsity/src/ui/pages/series_details/components/genres_info_widget.dart';
-import 'package:flutter_tv_maze_jobsity/src/ui/pages/series_details/components/schedule_info_widget.dart';
-import 'package:flutter_tv_maze_jobsity/src/ui/pages/series_details/components/series_status_widget.dart';
 
-import 'summary_widget.dart';
+import '../../../../domain/entities/get_series_details/series_detailed_info_entity.dart';
+import 'genres_info_widget.dart';
+import 'schedule_info_widget.dart';
+import 'series_status_widget.dart';
+
+import '../../shared/components/summary_widget.dart';
 
 class SeriesDetailsContent extends StatelessWidget {
   final SeriesDetailedInfoEntity seriesDetails;
