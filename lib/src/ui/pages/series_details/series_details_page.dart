@@ -8,7 +8,7 @@ import 'components/series_details_content.dart';
 import 'components/series_details_sliding_app_bar.dart';
 
 import '../../../domain/entities/get_series_details/series_detailed_info_entity.dart';
-import '../../../domain/entities/list_all_series/series_basic_info_entity.dart';
+import '../../../domain/entities/get_all_series/series_basic_info_entity.dart';
 import '../../themes/app_colors.dart';
 
 class SeriesDetailsPage extends StatefulWidget {

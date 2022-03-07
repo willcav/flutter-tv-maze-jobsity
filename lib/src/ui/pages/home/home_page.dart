@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_tv_maze_jobsity/src/domain/entities/list_all_series/series_basic_info_entity.dart';
+import 'package:flutter_tv_maze_jobsity/src/domain/entities/get_all_series/series_basic_info_entity.dart';
 import 'package:flutter_tv_maze_jobsity/src/presentation/presenters/home_presenter/home_presenter.dart';
 import 'package:flutter_tv_maze_jobsity/src/ui/mixins/navigation_manager.dart';
 import 'package:flutter_tv_maze_jobsity/src/ui/pages/home/components/home_sliding_app_bar.dart';
