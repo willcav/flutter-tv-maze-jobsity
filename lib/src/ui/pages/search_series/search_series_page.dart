@@ -6,6 +6,7 @@ import 'package:flutter_tv_maze_jobsity/src/ui/pages/search_series/components/se
 
 import '../../../domain/entities/list_all_series/series_basic_info_entity.dart';
 import '../../themes/app_colors.dart';
+import '../shared/components/message_widget.dart';
 import '../shared/components/series_card.dart';
 
 class SearchSeriesPage extends StatefulWidget {
@@ -52,19 +53,12 @@ class _SearchSeriesPageState extends State<SearchSeriesPage>
                         );
                       } else if (listSnapshot.hasData &&
                           listSnapshot.data!.isEmpty) {
-                        return Center(
-                          child: Text(
-                            'Search TV Shows',
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline1!
-                                .copyWith(fontWeight: FontWeight.w300),
-                          ),
+                        return const MessageWidget(
+                          message: 'Search TV Shows and Series',
                         );
                       } else if (listSnapshot.hasError) {
-                        return const Center(
-                          child: Text('Something wrong happened'),
+                        return const MessageWidget(
+                          message: 'Something Wrong Happened :(',
                         );
                       }
                     }
