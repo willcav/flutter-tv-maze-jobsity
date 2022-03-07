@@ -2,6 +2,8 @@ import 'package:flutter_tv_maze_jobsity/src/presentation/presenters/splash_prese
 import 'package:get_it/get_it.dart';
 
 import '../domain/use_cases/search_series/search_series_by_name_use_case.dart';
+import '../presentation/presenters/favorites_presenter/favorites_presenter.dart';
+import 'factories/presenters/getx_favorites_presenter_factory.dart';
 import 'factories/presenters/getx_splash_presenter_factory.dart';
 import 'factories/use_cases/remote_fetch_series_details_factory.dart';
 import '../domain/use_cases/fetch_series_details/fetch_series_details_use_case.dart';
@@ -35,6 +37,9 @@ Future<void> init() async {
       .registerFactory<SearchSeriesPresenter>(makeGetxSearchSeriesPresenter);
 
   serviceLocator.registerFactory<SplashPresenter>(makeGetxSplashPresenter);
+
+  serviceLocator
+      .registerFactory<FavoritesPresenter>(makeGetxFavoritesPresenter);
 
   // Use Cases
   serviceLocator.registerLazySingleton<GetAllSeriesPaginatedUseCase>(
