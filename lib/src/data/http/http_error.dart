@@ -4,8 +4,6 @@ import '../../domain/errors/domain_error.dart';
 abstract class HttpError extends DomainError {
   const HttpError._({String message = ''}) : super(message: message);
 
-  Type get type;
-
   factory HttpError.badRequest({String message = ''}) =>
       _BadRequest(message: message);
   factory HttpError.unauthorized({String message = ''}) =>
