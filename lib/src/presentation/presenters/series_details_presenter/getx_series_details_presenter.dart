@@ -1,10 +1,16 @@
+import 'package:flutter_tv_maze_jobsity/src/domain/entities/core/episode_entity.dart';
 import 'package:flutter_tv_maze_jobsity/src/domain/entities/get_series_details/series_detailed_info_entity.dart';
 import 'package:flutter_tv_maze_jobsity/src/domain/errors/domain_error.dart';
 import 'package:flutter_tv_maze_jobsity/src/domain/use_cases/fetch_series_details/fetch_series_details_use_case.dart';
+import 'package:flutter_tv_maze_jobsity/src/presentation/mixins/navigation_manager/presenter_navigation_manager.dart';
 import 'package:flutter_tv_maze_jobsity/src/presentation/presenters/series_details_presenter/series_details_presenter.dart';
 import 'package:get/get.dart';
 
+import '../../../routes/app_routes.dart';
+import '../../mixins/navigation_manager/navigation_arguments.dart';
+
 class GetxSeriesDetailsPresenter extends GetxController
+    with PresenterNavigationManager
     implements SeriesDetailsPresenter {
   final FetchSeriesDetailsUseCase fetchSeriesDetailsUseCase;
 
@@ -30,4 +36,10 @@ class GetxSeriesDetailsPresenter extends GetxController
   @override
   Stream<SeriesDetailedInfoEntity?> get seriesDetailsStream =>
       _seriesDetails.stream;
+
+  @override
+  void goToEpisodeDetailsPage({required EpisodeEntity episode}) {
+    navigateToWithArgs = NavigationArguments(AppRoutes.episodeDetailsPage,
+        arguments: {'episode': episode});
+  }
 }

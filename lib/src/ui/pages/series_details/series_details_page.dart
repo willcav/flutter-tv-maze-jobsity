@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_tv_maze_jobsity/src/ui/mixins/navigation_manager.dart';
 
 import '../../../presentation/presenters/series_details_presenter/series_details_presenter.dart';
 import '../shared/components/image_widget.dart';
@@ -22,7 +22,8 @@ class SeriesDetailsPage extends StatefulWidget {
   State<SeriesDetailsPage> createState() => _SeriesDetailsPageState();
 }
 
-class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
+class _SeriesDetailsPageState extends State<SeriesDetailsPage>
+    with NavigationManager {
   SeriesBasicInfoEntity? seriesInfo;
   late final ScrollController controller;
 
@@ -33,16 +34,11 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
     controller = ScrollController();
     seriesInfo = getNavigationArguments(argumentKey: 'seriesInfo');
 
+    handleNavigationWithArgs(widget.presenter.navigateToWithArgsStream);
+
     widget.presenter.getSeriesDetails(
       seriesId: seriesInfo != null ? seriesInfo!.id : '',
     );
-  }
-
-  T? getNavigationArguments<T>({required String argumentKey}) {
-    if (Get.arguments != null && Get.arguments[argumentKey] != null) {
-      return Get.arguments[argumentKey] as T;
-    }
-    return null;
   }
 
   @override
@@ -87,7 +83,10 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
                           seriesDetails: streamSnapshot.data!,
                         ),
                         SeasonsInfoWidget(
-                            seasons: streamSnapshot.data!.seasons),
+                          seasons: streamSnapshot.data!.seasons,
+                          episodeOnTapAction:
+                              widget.presenter.goToEpisodeDetailsPage,
+                        ),
                       ],
                     );
                   } else if (streamSnapshot.hasError) {

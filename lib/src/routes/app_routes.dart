@@ -1,4 +1,6 @@
 class AppRoutes {
+  static const splashPage = '/';
+
   static const mainNavigationPage = '/main-navigation';
 
   static const seriesDetailsPage = '/series/details';

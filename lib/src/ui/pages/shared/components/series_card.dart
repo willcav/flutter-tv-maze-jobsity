@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../../domain/entities/list_all_series/series_basic_info_entity.dart';
-import '../../../../routes/app_routes.dart';
 import '../../../themes/app_colors.dart';
 
-import '../../shared/components/image_widget.dart';
+import 'image_widget.dart';
 
-class HomeSeriesCard extends StatelessWidget {
+class SeriesCard extends StatelessWidget {
   final int index;
   final SeriesBasicInfoEntity seriesInfoItem;
-  const HomeSeriesCard({
+  final void Function({required SeriesBasicInfoEntity seriesEntity}) onTap;
+  const SeriesCard({
     Key? key,
     required this.index,
     required this.seriesInfoItem,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -21,10 +21,7 @@ class HomeSeriesCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: index == 0 || index == 1 ? 32 : 0),
       child: InkWell(
-        onTap: () {
-          Get.toNamed(AppRoutes.seriesDetailsPage,
-              arguments: {'seriesInfo': seriesInfoItem});
-        },
+        onTap: () => onTap(seriesEntity: seriesInfoItem),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,

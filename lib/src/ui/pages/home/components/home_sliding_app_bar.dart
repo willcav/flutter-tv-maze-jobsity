@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import '../../../../routes/app_routes.dart';
 import '../../../themes/app_colors.dart';
-import 'package:get/get.dart';
 
 class HomeSlidingAppBar extends StatefulWidget implements PreferredSizeWidget {
   final ScrollController scrollController;
-
+  final void Function() action;
   const HomeSlidingAppBar({
     Key? key,
     required this.scrollController,
+    required this.action,
   }) : super(key: key);
 
   @override
@@ -66,9 +65,7 @@ class _SlidingAppBarState extends State<HomeSlidingAppBar>
         ),
         actions: [
           IconButton(
-              onPressed: () {
-                Get.toNamed(AppRoutes.searchSeriesPage);
-              },
+              onPressed: widget.action,
               icon: const Hero(
                 tag: '-searchIcon-',
                 child: Icon(

@@ -1,12 +1,16 @@
-import 'package:flutter_tv_maze_jobsity/src/domain/entities/list_all_series/series_basic_info_entity.dart';
-import 'package:flutter_tv_maze_jobsity/src/domain/errors/domain_error.dart';
-import 'package:flutter_tv_maze_jobsity/src/domain/use_cases/search_series/search_series_by_name_use_case.dart';
-import 'package:flutter_tv_maze_jobsity/src/presentation/mixins/loading_manager.dart';
-import 'package:flutter_tv_maze_jobsity/src/presentation/presenters/search_series_presenter/search_series_presenter.dart';
+import 'package:flutter_tv_maze_jobsity/src/presentation/mixins/navigation_manager/navigation_arguments.dart';
+import 'package:flutter_tv_maze_jobsity/src/presentation/mixins/navigation_manager/presenter_navigation_manager.dart';
+import 'package:flutter_tv_maze_jobsity/src/routes/app_routes.dart';
+
+import '../../../domain/entities/list_all_series/series_basic_info_entity.dart';
+import '../../../domain/errors/domain_error.dart';
+import '../../../domain/use_cases/search_series/search_series_by_name_use_case.dart';
+import '../../mixins/loading_manager.dart';
+import 'search_series_presenter.dart';
 import 'package:get/get.dart';
 
 class GetxSearchSeriesPresenter extends GetxController
-    with LoadingManager
+    with LoadingManager, PresenterNavigationManager
     implements SearchSeriesPresenter {
   final SearchSeriesByNameUseCase searchSeriesByNameUseCase;
 
@@ -44,5 +48,11 @@ class GetxSearchSeriesPresenter extends GetxController
       isLoading = false;
       _seriesList.addError(e.toString(), StackTrace.empty);
     }
+  }
+
+  @override
+  void goToSeriesDetailsPage({required SeriesBasicInfoEntity seriesEntity}) {
+    navigateToWithArgs = NavigationArguments(AppRoutes.seriesDetailsPage,
+        arguments: {'seriesInfo': seriesEntity});
   }
 }
