@@ -1,3 +1,3 @@
 abstract class DeleteStringListDataStorage {
-  Future<void> deleteList({required String key});
+  Future<bool> deleteList({required String key});
 }
