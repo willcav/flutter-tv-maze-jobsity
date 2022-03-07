@@ -11,4 +11,14 @@ abstract class SeriesDetailsPresenter {
   void goToEpisodeDetailsPage({required EpisodeEntity episode});
 
   Stream<NavigationArguments> get navigateToWithArgsStream;
+
+  Stream<bool> get isLoadingStream;
+
+  Future<bool> addSeriesToFavorites({required String id});
+
+  Future<bool> removeSeriesFromFavorites({required String id});
+
+  void isSeriesFavorite({required String id});
+
+  Stream<bool> get isSeriesFavoritedStream;
 }

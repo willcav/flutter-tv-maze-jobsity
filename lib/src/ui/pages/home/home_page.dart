@@ -93,6 +93,7 @@ class _HomePageState extends State<HomePage> with NavigationManager {
         itemBuilder: (context, index) {
           return SeriesCard(
             key: ValueKey(index),
+            heroTag: 'home${list[index].id}',
             index: index,
             seriesInfoItem: list[index],
             onTap: widget.presenter.goToSeriesDetailsPage,

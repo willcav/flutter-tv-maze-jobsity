@@ -82,6 +82,7 @@ class _SearchSeriesPageState extends State<SearchSeriesPage>
       itemBuilder: (context, index) {
         return SeriesCard(
           key: ValueKey(index),
+          heroTag: 'search${list[index].id}',
           index: index,
           seriesInfoItem: list[index],
           onTap: widget.presenter.goToSeriesDetailsPage,

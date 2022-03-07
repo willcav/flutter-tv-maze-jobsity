@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_tv_maze_jobsity/src/presentation/presenters/favorites_presenter/favorites_presenter.dart';
+import 'package:flutter_tv_maze_jobsity/src/routes/app_routes.dart';
+import 'package:flutter_tv_maze_jobsity/src/ui/mixins/navigation_manager.dart';
 
 import '../../../domain/entities/get_all_series/series_basic_info_entity.dart';
 import '../../themes/app_colors.dart';
@@ -19,13 +21,23 @@ class FavoritesPage extends StatefulWidget {
   State<FavoritesPage> createState() => _FavoritesPageState();
 }
 
-class _FavoritesPageState extends State<FavoritesPage> {
+class _FavoritesPageState extends State<FavoritesPage> with NavigationManager {
   late final ScrollController controller;
   @override
   void initState() {
     super.initState();
 
+    handleNavigationWithArgs(widget.presenter.navigateToWithArgsStream);
+
+    widget.presenter.getAllFavoriteSeries();
+
     controller = ScrollController();
+  }
+
+  Future<bool> _reloadFavorites() async {
+    widget.presenter.getAllFavoriteSeries();
+
+    return true;
   }
 
   @override
@@ -46,31 +58,61 @@ class _FavoritesPageState extends State<FavoritesPage> {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: StreamBuilder<List<SeriesBasicInfoEntity>>(
-              initialData: const [],
-              stream: widget.presenter.seriesListStream,
-              builder: (context, listSnapshot) {
-                if (listSnapshot.hasData && listSnapshot.data!.isNotEmpty) {
-                  return buildList(
-                    controller: controller,
-                    list: listSnapshot.data!,
-                  );
-                } else if (listSnapshot.hasData && listSnapshot.data!.isEmpty) {
-                  return const MessageWidget(
-                    message:
-                        'Your favorite Series and TV Shows will appear listed here :)',
-                  );
-                } else if (listSnapshot.hasError) {
-                  return const MessageWidget(
-                    message: 'Something wrong happened :(',
-                  );
-                }
+          child: FutureBuilder(
+              future: _reloadFavorites(),
+              builder: (context, _) {
+                return StreamBuilder<List<SeriesBasicInfoEntity>>(
+                    initialData: const [],
+                    stream: widget.presenter.seriesListStream,
+                    builder: (context, listSnapshot) {
+                      return StreamBuilder(
+                          stream: widget.presenter.isLoadingStream,
+                          builder: (context, loadingSnapshot) {
+                            if (loadingSnapshot.hasData &&
+                                loadingSnapshot.data == false) {
+                              if (listSnapshot.hasData &&
+                                  listSnapshot.data!.isNotEmpty) {
+                                return buildList(
+                                  controller: controller,
+                                  list: listSnapshot.data!,
+                                );
+                              } else if (listSnapshot.hasData &&
+                                  listSnapshot.data!.isEmpty) {
+                                return const MessageWidget(
+                                  message:
+                                      'Your favorite Series and TV Shows will appear listed here :)',
+                                );
+                              } else if (listSnapshot.hasError) {
+                                return const MessageWidget(
+                                  message: 'Something wrong happened :(',
+                                );
+                              }
 
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          });
+                    });
               }),
         ));
+  }
+
+  void _goToPage({required SeriesBasicInfoEntity seriesEntity}) {
+    goToPage(
+      route: AppRoutes.seriesDetailsPage,
+      arguments: {
+        'seriesInfo': seriesEntity,
+        'heroTag': 'favorite${seriesEntity.id}'
+      },
+    )!
+        .then((_) {
+      setState(() {});
+    });
   }
 
   Widget buildList(
@@ -87,9 +129,10 @@ class _FavoritesPageState extends State<FavoritesPage> {
         itemBuilder: (context, index) {
           return SeriesCard(
             key: ValueKey(index),
+            heroTag: 'favorite${list[index].id}',
             index: index,
             seriesInfoItem: list[index],
-            onTap: widget.presenter.goToSeriesDetailsPage,
+            onTap: _goToPage,
           );
         },
       ),
