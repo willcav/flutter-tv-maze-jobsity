@@ -2,23 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import '../../../themes/app_colors.dart';
 
-class HomeSlidingAppBar extends StatefulWidget implements PreferredSizeWidget {
+class SlidingAppBar extends StatefulWidget implements PreferredSizeWidget {
+  final String title;
   final ScrollController scrollController;
-  final void Function() action;
-  const HomeSlidingAppBar({
+  final void Function()? action;
+  final Widget icon;
+
+  const SlidingAppBar({
     Key? key,
     required this.scrollController,
     required this.action,
+    required this.title,
+    required this.icon,
   }) : super(key: key);
 
   @override
-  State<HomeSlidingAppBar> createState() => _SlidingAppBarState();
+  State<SlidingAppBar> createState() => _SlidingAppBarState();
 
   @override
   Size get preferredSize => AppBar().preferredSize;
 }
 
-class _SlidingAppBarState extends State<HomeSlidingAppBar>
+class _SlidingAppBarState extends State<SlidingAppBar>
     with TickerProviderStateMixin {
   late final AnimationController animationController;
   bool _visible = true;
@@ -60,19 +65,14 @@ class _SlidingAppBarState extends State<HomeSlidingAppBar>
         elevation: 0,
         backgroundColor: AppColors.grey,
         title: Text(
-          'TV Shows',
+          widget.title,
           style: Theme.of(context).textTheme.headline1,
         ),
         actions: [
           IconButton(
-              onPressed: widget.action,
-              icon: const Hero(
-                tag: '-searchIcon-',
-                child: Icon(
-                  Icons.search,
-                  color: AppColors.black,
-                ),
-              )),
+            onPressed: widget.action,
+            icon: widget.icon,
+          ),
         ],
       ),
     );

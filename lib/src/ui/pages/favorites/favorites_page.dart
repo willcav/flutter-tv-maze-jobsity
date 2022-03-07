@@ -4,7 +4,7 @@ import 'package:flutter_tv_maze_jobsity/src/presentation/presenters/favorites_pr
 
 import '../../../domain/entities/get_all_series/series_basic_info_entity.dart';
 import '../../themes/app_colors.dart';
-import '../home/components/home_sliding_app_bar.dart';
+import '../shared/components/sliding_app_bar.dart';
 import '../shared/components/message_widget.dart';
 import '../shared/components/series_card.dart';
 
@@ -32,13 +32,22 @@ class _FavoritesPageState extends State<FavoritesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColors.grey,
-        appBar: HomeSlidingAppBar(
+        appBar: SlidingAppBar(
+          title: 'Favorites',
           scrollController: controller,
           action: () {},
+          icon: const Hero(
+            tag: '-configIcon-',
+            child: Icon(
+              Icons.lock_open_outlined,
+              color: AppColors.black,
+            ),
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: StreamBuilder<List<SeriesBasicInfoEntity>>(
+              initialData: const [],
               stream: widget.presenter.seriesListStream,
               builder: (context, listSnapshot) {
                 if (listSnapshot.hasData && listSnapshot.data!.isNotEmpty) {
@@ -48,7 +57,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   );
                 } else if (listSnapshot.hasData && listSnapshot.data!.isEmpty) {
                   return const MessageWidget(
-                    message: 'Add your favorites TV Shows and Series here :)',
+                    message:
+                        'Your favorite Series and TV Shows will appear listed here :)',
                   );
                 } else if (listSnapshot.hasError) {
                   return const MessageWidget(
