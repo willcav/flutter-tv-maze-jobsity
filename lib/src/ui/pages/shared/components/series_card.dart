@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../domain/entities/list_all_series/series_basic_info_entity.dart';
+import '../../../../domain/entities/get_all_series/series_basic_info_entity.dart';
 import '../../../themes/app_colors.dart';
 
 import 'image_widget.dart';

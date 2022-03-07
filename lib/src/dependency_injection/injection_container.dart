@@ -5,7 +5,7 @@ import '../domain/use_cases/search_series/search_series_by_name_use_case.dart';
 import 'factories/presenters/getx_splash_presenter_factory.dart';
 import 'factories/use_cases/remote_fetch_series_details_factory.dart';
 import '../domain/use_cases/fetch_series_details/fetch_series_details_use_case.dart';
-import '../domain/use_cases/list_all_series/get_all_series_paginated_use_case.dart';
+import '../domain/use_cases/get_all_series/get_all_series_paginated_use_case.dart';
 import '../presentation/presenters/home_presenter/home_presenter.dart';
 import '../presentation/presenters/main_navigation_presenter/main_navigation_presenter.dart';
 import '../data/http/http_client.dart';
