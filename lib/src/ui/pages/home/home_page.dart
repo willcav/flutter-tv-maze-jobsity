@@ -66,21 +66,23 @@ class _HomePageState extends State<HomePage> with NavigationManager {
   Widget buildList(
       {required ScrollController controller,
       required List<SeriesBasicInfoEntity> list}) {
-    return MasonryGridView.count(
-      controller: controller,
-      physics: const BouncingScrollPhysics(),
-      crossAxisCount: 2,
-      mainAxisSpacing: 24,
-      crossAxisSpacing: 16,
-      itemCount: list.length,
-      itemBuilder: (context, index) {
-        return SeriesCard(
-          key: ValueKey(index),
-          index: index,
-          seriesInfoItem: list[index],
-          onTap: widget.presenter.goToSeriesDetailsPage,
-        );
-      },
+    return RepaintBoundary(
+      child: MasonryGridView.count(
+        controller: controller,
+        physics: const BouncingScrollPhysics(),
+        crossAxisCount: 2,
+        mainAxisSpacing: 24,
+        crossAxisSpacing: 16,
+        itemCount: list.length,
+        itemBuilder: (context, index) {
+          return SeriesCard(
+            key: ValueKey(index),
+            index: index,
+            seriesInfoItem: list[index],
+            onTap: widget.presenter.goToSeriesDetailsPage,
+          );
+        },
+      ),
     );
   }
 }
