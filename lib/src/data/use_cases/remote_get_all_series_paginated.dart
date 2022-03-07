@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_tv_maze_jobsity/src/data/http/http_client.dart';
 import 'package:flutter_tv_maze_jobsity/src/data/http/http_error.dart';
-import 'package:flutter_tv_maze_jobsity/src/data/models/list_all_series/series_basic_info_model.dart';
-import 'package:flutter_tv_maze_jobsity/src/domain/entities/list_all_series/series_basic_info_entity.dart';
+import 'package:flutter_tv_maze_jobsity/src/data/models/get_all_series/series_basic_info_model.dart';
+import 'package:flutter_tv_maze_jobsity/src/domain/entities/get_all_series/series_basic_info_entity.dart';
 import 'package:flutter_tv_maze_jobsity/src/domain/errors/domain_error.dart';
-import 'package:flutter_tv_maze_jobsity/src/domain/use_cases/list_all_series/get_all_series_paginated_use_case.dart';
+import 'package:flutter_tv_maze_jobsity/src/domain/use_cases/get_all_series/get_all_series_paginated_use_case.dart';
 
 class RemoteGetAllSeriesPaginated implements GetAllSeriesPaginatedUseCase {
   final HttpClient client;

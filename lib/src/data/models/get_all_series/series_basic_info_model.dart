@@ -1,6 +1,6 @@
 import 'package:flutter_tv_maze_jobsity/src/data/models/core/image_link_options_model.dart';
 import 'package:flutter_tv_maze_jobsity/src/data/models/core/rating_model.dart';
-import 'package:flutter_tv_maze_jobsity/src/domain/entities/list_all_series/series_basic_info_entity.dart';
+import 'package:flutter_tv_maze_jobsity/src/domain/entities/get_all_series/series_basic_info_entity.dart';
 
 class SeriesBasicInfoModel extends SeriesBasicInfoEntity {
   final String dtoId;

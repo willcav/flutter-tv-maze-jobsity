@@ -1,11 +1,31 @@
-import 'package:flutter_tv_maze_jobsity/src/presentation/presenters/splash_presenter/splash_presenter.dart';
+import 'package:flutter_tv_maze_jobsity/src/dependency_injection/factories/cache/save_string_list_data_storage_factory.dart';
 import 'package:get_it/get_it.dart';
 
+import '../data/cache/delete_string_list_data_storage.dart';
+import '../data/cache/fetch_string_list_data_storage.dart';
+import '../data/cache/save_string_list_data_storage.dart';
+import 'factories/cache/delete_string_list_data_storage_factory.dart';
+import 'factories/cache/fetch_string_list_data_storage_factory.dart';
+import 'factories/use_cases/local_check_if_series_is_favorite_factory.dart';
+import 'factories/use_cases/local_delete_favorite_series_id_factory.dart';
+import 'factories/use_cases/local_fetch_all_favorite_series_ids_factory.dart';
+import 'factories/use_cases/local_save_favorite_series_id_factory.dart';
+import 'factories/use_cases/remote_get_all_favorite_series_factory.dart';
+import 'factories/use_cases/remote_get_series_by_id_factory.dart';
+import '../presentation/presenters/splash_presenter/splash_presenter.dart';
+import '../domain/use_cases/check_if_series_is_favorite/check_if_series_is_favorite_use_case.dart';
+import '../domain/use_cases/delete_favorite_series_id/delete_favorite_series_id_use_case.dart';
+import '../domain/use_cases/fetch_all_favorite_series_ids/fetch_all_favorite_series_ids_use_case.dart';
+import '../domain/use_cases/get_all_favorite_series/get_all_favorite_series_use_case.dart';
+import '../domain/use_cases/get_series_by_id/get_series_by_id_use_case.dart';
+import '../domain/use_cases/save_favorite_series_id/save_favorite_series_id_use_case.dart';
 import '../domain/use_cases/search_series/search_series_by_name_use_case.dart';
+import '../presentation/presenters/favorites_presenter/favorites_presenter.dart';
+import 'factories/presenters/getx_favorites_presenter_factory.dart';
 import 'factories/presenters/getx_splash_presenter_factory.dart';
 import 'factories/use_cases/remote_fetch_series_details_factory.dart';
 import '../domain/use_cases/fetch_series_details/fetch_series_details_use_case.dart';
-import '../domain/use_cases/list_all_series/get_all_series_paginated_use_case.dart';
+import '../domain/use_cases/get_all_series/get_all_series_paginated_use_case.dart';
 import '../presentation/presenters/home_presenter/home_presenter.dart';
 import '../presentation/presenters/main_navigation_presenter/main_navigation_presenter.dart';
 import '../data/http/http_client.dart';
@@ -23,6 +43,17 @@ final serviceLocator = GetIt.instance;
 
 Future<void> init() async {
   // Presenters
+  _initPresenters();
+
+  // Use Cases
+  _initUseCases();
+
+  // HttpClient Dio Adapater
+  _initAdapters();
+}
+
+/// Initialize all Presenters
+void _initPresenters() {
   serviceLocator.registerFactory<HomePresenter>(makeGetxHomePresenter);
 
   serviceLocator.registerFactory<MainNavigationPresenter>(
@@ -36,7 +67,12 @@ Future<void> init() async {
 
   serviceLocator.registerFactory<SplashPresenter>(makeGetxSplashPresenter);
 
-  // Use Cases
+  serviceLocator
+      .registerFactory<FavoritesPresenter>(makeGetxFavoritesPresenter);
+}
+
+/// Initialize all Use Cases
+void _initUseCases() {
   serviceLocator.registerLazySingleton<GetAllSeriesPaginatedUseCase>(
     makeRemoteGetAllSeriesPaginated,
   );
@@ -49,8 +85,46 @@ Future<void> init() async {
     makeRemoteSearchSeriesByName,
   );
 
-  // HttpClient Dio Adapater
+  serviceLocator.registerLazySingleton<GetSeriesByIdUseCase>(
+    makeRemoteGetSeriesById,
+  );
+
+  serviceLocator.registerLazySingleton<GetAllFavoriteSeriesUseCase>(
+    makeRemoteGetAllFavoriteSeries,
+  );
+
+  serviceLocator.registerLazySingleton<SaveFavoriteSeriesIdUseCase>(
+    makeLocalSaveFavoriteSeriesId,
+  );
+
+  serviceLocator.registerLazySingleton<FetchAllFavoriteSeriesIdsUseCase>(
+    makeLocalFetchAllFavoriteSeriesIds,
+  );
+
+  serviceLocator.registerLazySingleton<DeleteFavoriteSeriesIdUseCase>(
+    makeLocalDeleteFavoriteSeriesId,
+  );
+
+  serviceLocator.registerLazySingleton<CheckIfSeriesIsFavoriteUseCase>(
+    makeLocalCheckIfSeriesIsFavorite,
+  );
+}
+
+/// Initialize all Adapters
+void _initAdapters() {
   serviceLocator.registerLazySingleton<HttpClient>(
     makeDioAdapter,
+  );
+
+  serviceLocator.registerLazySingleton<SaveStringListDataStorage>(
+    makeSaveStringListDataStorage,
+  );
+
+  serviceLocator.registerLazySingleton<FetchStringListDataStorage>(
+    makeFetchStringListDataStorage,
+  );
+
+  serviceLocator.registerLazySingleton<DeleteStringListDataStorage>(
+    makeDeleteStringListDataStorage,
   );
 }

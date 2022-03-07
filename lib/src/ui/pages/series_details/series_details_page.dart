@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tv_maze_jobsity/src/ui/mixins/navigation_manager.dart';
+import 'package:flutter_tv_maze_jobsity/src/ui/pages/series_details/components/series_details_featured_image_widget.dart';
 
 import '../../../presentation/presenters/series_details_presenter/series_details_presenter.dart';
-import '../shared/components/image_widget.dart';
 import 'components/seasons_info_widget.dart';
 import 'components/series_details_content.dart';
 import 'components/series_details_sliding_app_bar.dart';
 
 import '../../../domain/entities/get_series_details/series_detailed_info_entity.dart';
-import '../../../domain/entities/list_all_series/series_basic_info_entity.dart';
+import '../../../domain/entities/get_all_series/series_basic_info_entity.dart';
 import '../../themes/app_colors.dart';
 
 class SeriesDetailsPage extends StatefulWidget {
@@ -26,6 +26,7 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage>
     with NavigationManager {
   SeriesBasicInfoEntity? seriesInfo;
   late final ScrollController controller;
+  late final String heroTag;
 
   @override
   void initState() {
@@ -33,6 +34,7 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage>
 
     controller = ScrollController();
     seriesInfo = getNavigationArguments(argumentKey: 'seriesInfo');
+    heroTag = getNavigationArguments(argumentKey: 'heroTag');
 
     handleNavigationWithArgs(widget.presenter.navigateToWithArgsStream);
 
@@ -58,18 +60,19 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage>
             stretch: true,
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-                collapseMode: CollapseMode.parallax,
-                stretchModes: const [
-                  StretchMode.blurBackground,
-                  StretchMode.zoomBackground
-                ],
-                background: seriesInfo != null
-                    ? Hero(
-                        tag: '${seriesInfo!.id}${seriesInfo!.name}',
-                        child: ImageWidget(
-                            imageNetworkPath: seriesInfo!.image.original),
-                      )
-                    : const SizedBox()),
+              collapseMode: CollapseMode.parallax,
+              stretchModes: const [
+                StretchMode.blurBackground,
+                StretchMode.zoomBackground
+              ],
+              background: seriesInfo != null
+                  ? SeriesDetailsFeaturedImageWidget(
+                      heroTag: heroTag,
+                      seriesInfo: seriesInfo!,
+                      presenter: widget.presenter,
+                    )
+                  : const SizedBox(),
+            ),
           ),
           SliverList(
               delegate: SliverChildListDelegate([

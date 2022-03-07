@@ -2,7 +2,7 @@ import 'package:flutter_tv_maze_jobsity/src/presentation/mixins/navigation_manag
 import 'package:flutter_tv_maze_jobsity/src/presentation/mixins/navigation_manager/presenter_navigation_manager.dart';
 import 'package:flutter_tv_maze_jobsity/src/routes/app_routes.dart';
 
-import '../../../domain/entities/list_all_series/series_basic_info_entity.dart';
+import '../../../domain/entities/get_all_series/series_basic_info_entity.dart';
 import '../../../domain/errors/domain_error.dart';
 import '../../../domain/use_cases/search_series/search_series_by_name_use_case.dart';
 import '../../mixins/loading_manager.dart';
@@ -52,7 +52,12 @@ class GetxSearchSeriesPresenter extends GetxController
 
   @override
   void goToSeriesDetailsPage({required SeriesBasicInfoEntity seriesEntity}) {
-    navigateToWithArgs = NavigationArguments(AppRoutes.seriesDetailsPage,
-        arguments: {'seriesInfo': seriesEntity});
+    navigateToWithArgs = NavigationArguments(
+      AppRoutes.seriesDetailsPage,
+      arguments: {
+        'seriesInfo': seriesEntity,
+        'heroTag': 'search${seriesEntity.id}'
+      },
+    );
   }
 }
