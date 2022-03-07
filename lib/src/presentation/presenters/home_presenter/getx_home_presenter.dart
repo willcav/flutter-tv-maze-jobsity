@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+
+import 'package:flutter_tv_maze_jobsity/src/base/errors/errors.dart';
 import 'package:flutter_tv_maze_jobsity/src/domain/entities/list_all_series/series_basic_info_entity.dart';
 import 'package:flutter_tv_maze_jobsity/src/domain/errors/domain_error.dart';
 import 'package:flutter_tv_maze_jobsity/src/presentation/mixins/navigation_manager/navigation_arguments.dart';
@@ -18,19 +20,52 @@ class GetxHomePresenter extends GetxController
     required this.getAllSeriesPaginatedUseCase,
   });
 
-  final _seriesList = Rx<List<SeriesBasicInfoEntity>>([]);
-  final int _pageCounter = 0;
+  final _seriesList = Rx<List<SeriesBasicInfoEntity>>(const []);
+  int _pageCounter = 0;
+  bool _isPaginationEnabled = true;
+
+  final List<SeriesBasicInfoEntity> _lastListReceived = [];
 
   @override
-  void getAllSeries() async {
+  Future<void> getAllSeries() async {
     try {
       final _params = GetAllSeriesPaginatedUseCaseParams(page: _pageCounter);
 
-      _seriesList.subject
-          .add(await getAllSeriesPaginatedUseCase.call(params: _params));
+      final result = await getAllSeriesPaginatedUseCase.call(params: _params);
+
+      _setResult(result);
     } on DomainError catch (e) {
-      debugPrint(e.toString());
-      _seriesList.addError(e, StackTrace.empty);
+      if (e.type == const NotFoundError().type) {
+        _isPaginationEnabled = false;
+        _seriesList.subject.add(const []);
+      } else {
+        debugPrint(e.toString());
+        _seriesList.addError(e, StackTrace.empty);
+      }
+    }
+  }
+
+  void _setResult(List<SeriesBasicInfoEntity> result) {
+    if (_pageCounter == 0) {
+      _lastListReceived.addAll(result);
+      _seriesList.subject.add(result);
+    } else {
+      _lastListReceived.addAll(result);
+      _seriesList.subject.add(_lastListReceived);
+    }
+  }
+
+  @override
+  void loadMoreSeries() {
+    if (_isPaginationEnabled) {
+      _isPaginationEnabled = false;
+      _pageCounter++;
+      getAllSeries().then(
+        (_) => Future.delayed(
+          const Duration(seconds: 2),
+          () => _isPaginationEnabled = true,
+        ),
+      );
     }
   }
 

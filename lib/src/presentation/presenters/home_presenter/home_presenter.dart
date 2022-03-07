@@ -5,6 +5,8 @@ import '../../mixins/navigation_manager/navigation_arguments.dart';
 abstract class HomePresenter {
   void getAllSeries();
 
+  void loadMoreSeries();
+
   Stream<List<SeriesBasicInfoEntity>> get seriesListStream;
 
   void goToSearchSeriesPage();

@@ -6,6 +6,7 @@ import 'package:flutter_tv_maze_jobsity/src/ui/mixins/navigation_manager.dart';
 import 'package:flutter_tv_maze_jobsity/src/ui/pages/home/components/home_sliding_app_bar.dart';
 import 'package:flutter_tv_maze_jobsity/src/ui/themes/app_colors.dart';
 
+import '../shared/components/message_widget.dart';
 import '../shared/components/series_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -25,7 +26,14 @@ class _HomePageState extends State<HomePage> with NavigationManager {
     handleNavigationWithArgs(widget.presenter.navigateToWithArgsStream);
 
     widget.presenter.getAllSeries();
-    controller = ScrollController();
+
+    controller = ScrollController()
+      ..addListener(() {
+        if (controller.position.pixels >=
+            controller.position.maxScrollExtent - 500) {
+          widget.presenter.loadMoreSeries();
+        }
+      });
   }
 
   @override
@@ -47,12 +55,12 @@ class _HomePageState extends State<HomePage> with NavigationManager {
                     list: listSnapshot.data!,
                   );
                 } else if (listSnapshot.hasData && listSnapshot.data!.isEmpty) {
-                  return const Center(
-                    child: Text('No Tv Show here :('),
+                  return const MessageWidget(
+                    message: 'No TV Shows or Series here',
                   );
                 } else if (listSnapshot.hasError) {
-                  return const Center(
-                    child: Text('Something wrong happened :('),
+                  return const MessageWidget(
+                    message: 'Something wrong happened :(',
                   );
                 }
 

@@ -18,6 +18,7 @@ class ImageWidget extends StatelessWidget {
 
     return FadeInImage.assetNetwork(
       placeholder: 'assets/images/default_image.png',
+      height: 250,
       image: imageNetworkPath,
       fit: BoxFit.cover,
     );
