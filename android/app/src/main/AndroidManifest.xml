@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.willcav.tvmaze.jobsity.flutter_tv_maze_jobsity">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="flutter_tv_maze_jobsity"
         android:name="${applicationName}"
