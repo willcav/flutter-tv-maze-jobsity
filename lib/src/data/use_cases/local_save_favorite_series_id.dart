@@ -19,7 +19,9 @@ class LocalSaveFavoriteSeriesId implements SaveFavoriteSeriesIdUseCase {
 
       final currentList = await fetchAllFavoriteSeriesIdsUseCase.call();
 
-      currentList.add(id);
+      if (!currentList.contains(id)) {
+        currentList.add(id);
+      }
 
       await saveStringListDataStorage.saveList(key: key, value: currentList);
     } on CacheError catch (e) {
