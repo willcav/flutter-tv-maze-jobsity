@@ -7,6 +7,7 @@ import 'image_widget.dart';
 
 class SeriesCard extends StatelessWidget {
   final int index;
+  final String heroTag;
   final SeriesBasicInfoEntity seriesInfoItem;
   final void Function({required SeriesBasicInfoEntity seriesEntity}) onTap;
   const SeriesCard({
@@ -14,6 +15,7 @@ class SeriesCard extends StatelessWidget {
     required this.index,
     required this.seriesInfoItem,
     required this.onTap,
+    required this.heroTag,
   }) : super(key: key);
 
   @override
@@ -35,7 +37,7 @@ class SeriesCard extends StatelessWidget {
                   color: AppColors.grey1,
                 ),
                 child: Hero(
-                  tag: '${seriesInfoItem.id}${seriesInfoItem.name}',
+                  tag: heroTag,
                   child: ImageWidget(
                     imageNetworkPath: seriesInfoItem.image.medium,
                   ),

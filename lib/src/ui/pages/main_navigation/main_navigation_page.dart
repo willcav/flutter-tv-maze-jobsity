@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tv_maze_jobsity/src/presentation/presenters/home_presenter/home_presenter.dart';
-import 'package:flutter_tv_maze_jobsity/src/ui/pages/home/home_page.dart';
-import 'package:flutter_tv_maze_jobsity/src/ui/pages/main_navigation/components/custom_bottom_navigation_bar.dart';
-import 'package:flutter_tv_maze_jobsity/src/ui/themes/app_colors.dart';
 
+import '../../../presentation/presenters/favorites_presenter/favorites_presenter.dart';
+import '../../../presentation/presenters/home_presenter/home_presenter.dart';
+import '../favorites/favorites_page.dart';
+import '../home/home_page.dart';
+import 'components/custom_bottom_navigation_bar.dart';
+import '../../themes/app_colors.dart';
 import '../../../presentation/presenters/main_navigation_presenter/main_navigation_presenter.dart';
 
 class MainNavigationPage extends StatelessWidget {
   final MainNavigationPresenter mainNavigationPresenter;
   final HomePresenter homePresenter;
+  final FavoritesPresenter favoritesPresenter;
+
   const MainNavigationPage({
     Key? key,
     required this.mainNavigationPresenter,
     required this.homePresenter,
+    required this.favoritesPresenter,
   }) : super(key: key);
 
   @override
@@ -38,15 +43,8 @@ class MainNavigationPage extends StatelessWidget {
 
   List<Widget> pages() {
     return [
-      HomePage(
-        presenter: homePresenter,
-      ),
-      const Scaffold(
-        backgroundColor: AppColors.grey,
-        body: Center(
-          child: Text('Favorites'),
-        ),
-      ),
+      HomePage(presenter: homePresenter),
+      FavoritesPage(presenter: favoritesPresenter),
       const Scaffold(
         backgroundColor: AppColors.grey,
         body: Center(

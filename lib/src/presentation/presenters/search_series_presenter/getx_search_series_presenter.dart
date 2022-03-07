@@ -52,7 +52,12 @@ class GetxSearchSeriesPresenter extends GetxController
 
   @override
   void goToSeriesDetailsPage({required SeriesBasicInfoEntity seriesEntity}) {
-    navigateToWithArgs = NavigationArguments(AppRoutes.seriesDetailsPage,
-        arguments: {'seriesInfo': seriesEntity});
+    navigateToWithArgs = NavigationArguments(
+      AppRoutes.seriesDetailsPage,
+      arguments: {
+        'seriesInfo': seriesEntity,
+        'heroTag': 'search${seriesEntity.id}'
+      },
+    );
   }
 }
