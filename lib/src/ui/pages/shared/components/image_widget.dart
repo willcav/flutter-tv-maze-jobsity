@@ -16,8 +16,9 @@ class ImageWidget extends StatelessWidget {
       );
     }
 
-    return Image.network(
-      imageNetworkPath,
+    return FadeInImage.assetNetwork(
+      placeholder: 'assets/images/default_image.png',
+      image: imageNetworkPath,
       fit: BoxFit.cover,
     );
   }
