@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_tv_maze_jobsity/src/presentation/presenters/search_series_presenter/search_series_presenter.dart';
+import 'package:flutter_tv_maze_jobsity/src/ui/mixins/navigation_manager.dart';
 import 'package:flutter_tv_maze_jobsity/src/ui/pages/search_series/components/search_series_app_bar.dart';
 
 import '../../../domain/entities/list_all_series/series_basic_info_entity.dart';
 import '../../themes/app_colors.dart';
-import '../home/components/home_series_card.dart';
+import '../shared/components/series_card.dart';
 
 class SearchSeriesPage extends StatefulWidget {
   final SearchSeriesPresenter presenter;
@@ -18,7 +19,15 @@ class SearchSeriesPage extends StatefulWidget {
   State<SearchSeriesPage> createState() => _SearchSeriesPageState();
 }
 
-class _SearchSeriesPageState extends State<SearchSeriesPage> {
+class _SearchSeriesPageState extends State<SearchSeriesPage>
+    with NavigationManager {
+  @override
+  void initState() {
+    super.initState();
+
+    handleNavigationWithArgs(widget.presenter.navigateToWithArgsStream);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +54,7 @@ class _SearchSeriesPageState extends State<SearchSeriesPage> {
                           listSnapshot.data!.isEmpty) {
                         return Center(
                           child: Text(
-                            'Search TV Shows 😁',
+                            'Search TV Shows',
                             textAlign: TextAlign.center,
                             style: Theme.of(context)
                                 .textTheme
@@ -55,7 +64,7 @@ class _SearchSeriesPageState extends State<SearchSeriesPage> {
                         );
                       } else if (listSnapshot.hasError) {
                         return const Center(
-                          child: Text('Something wrong happened 😞'),
+                          child: Text('Something wrong happened'),
                         );
                       }
                     }
@@ -77,8 +86,12 @@ class _SearchSeriesPageState extends State<SearchSeriesPage> {
       crossAxisSpacing: 16,
       itemCount: list.length,
       itemBuilder: (context, index) {
-        return HomeSeriesCard(
-            key: ValueKey(index), index: index, seriesInfoItem: list[index]);
+        return SeriesCard(
+          key: ValueKey(index),
+          index: index,
+          seriesInfoItem: list[index],
+          onTap: widget.presenter.goToSeriesDetailsPage,
+        );
       },
     );
   }

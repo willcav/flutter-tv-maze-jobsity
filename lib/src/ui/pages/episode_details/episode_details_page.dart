@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tv_maze_jobsity/src/ui/mixins/navigation_manager.dart';
 
 import '../../../domain/entities/core/episode_entity.dart';
 import 'components/episode_details_content.dart';
-import 'package:get/get.dart';
 
 import '../../themes/app_colors.dart';
 import '../series_details/components/series_details_sliding_app_bar.dart';
@@ -17,7 +17,8 @@ class EpisodeDetailsPage extends StatefulWidget {
   State<EpisodeDetailsPage> createState() => _EpisodeDetailsPageState();
 }
 
-class _EpisodeDetailsPageState extends State<EpisodeDetailsPage> {
+class _EpisodeDetailsPageState extends State<EpisodeDetailsPage>
+    with NavigationManager {
   EpisodeEntity? episode;
   late final ScrollController controller;
 
@@ -28,13 +29,6 @@ class _EpisodeDetailsPageState extends State<EpisodeDetailsPage> {
     controller = ScrollController();
 
     episode = getNavigationArguments<EpisodeEntity>(argumentKey: 'episode');
-  }
-
-  T? getNavigationArguments<T>({required String argumentKey}) {
-    if (Get.arguments != null && Get.arguments[argumentKey] != null) {
-      return Get.arguments[argumentKey] as T;
-    }
-    return null;
   }
 
   @override

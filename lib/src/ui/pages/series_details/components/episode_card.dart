@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tv_maze_jobsity/src/domain/entities/core/episode_entity.dart';
-import 'package:flutter_tv_maze_jobsity/src/routes/app_routes.dart';
 import 'package:flutter_tv_maze_jobsity/src/ui/pages/shared/components/image_widget.dart';
-import 'package:get/get.dart';
 
 import '../../../themes/app_colors.dart';
 
 class EpisodeCard extends StatelessWidget {
   final EpisodeEntity episode;
+  final void Function({required EpisodeEntity episode}) action;
   const EpisodeCard({
     Key? key,
     required this.episode,
+    required this.action,
   }) : super(key: key);
 
   @override
@@ -18,12 +18,7 @@ class EpisodeCard extends StatelessWidget {
     return SizedBox(
       width: 250,
       child: InkWell(
-        onTap: () {
-          Get.toNamed(
-            AppRoutes.episodeDetailsPage,
-            arguments: {'episode': episode},
-          );
-        },
+        onTap: () => action(episode: episode),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,

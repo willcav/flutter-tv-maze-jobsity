@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tv_maze_jobsity/src/domain/entities/core/season_entity.dart';
 import 'package:flutter_tv_maze_jobsity/src/ui/pages/series_details/components/episode_card.dart';
 
+import '../../../../domain/entities/core/episode_entity.dart';
+
 class SeasonsInfoWidget extends StatelessWidget {
   final List<SeasonEntity> seasons;
+  final void Function({required EpisodeEntity episode}) episodeOnTapAction;
+
   const SeasonsInfoWidget({
     Key? key,
     required this.seasons,
+    required this.episodeOnTapAction,
   }) : super(key: key);
 
   @override
@@ -50,6 +55,7 @@ class SeasonsInfoWidget extends StatelessWidget {
                 ),
                 child: EpisodeCard(
                   episode: season.episodes[index],
+                  action: episodeOnTapAction,
                 ),
               );
             },
