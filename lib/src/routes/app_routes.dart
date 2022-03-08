@@ -8,4 +8,6 @@ class AppRoutes {
   static const episodeDetailsPage = '/episode/details';
 
   static const searchSeriesPage = '/home/search-series';
+
+  static const personDetailsPage = '/people/details';
 }
