@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_tv_maze_jobsity/src/presentation/presenters/search_series_presenter/search_series_presenter.dart';
-import 'package:flutter_tv_maze_jobsity/src/ui/mixins/navigation_manager.dart';
-import 'package:flutter_tv_maze_jobsity/src/ui/pages/search_series/components/search_series_app_bar.dart';
 
+import '../../../presentation/presenters/search_series_presenter/search_series_presenter.dart';
+import '../../mixins/navigation_manager.dart';
+import 'components/search_series_app_bar.dart';
 import '../../../domain/entities/get_all_series/series_basic_info_entity.dart';
 import '../../themes/app_colors.dart';
 import '../shared/components/message_widget.dart';
