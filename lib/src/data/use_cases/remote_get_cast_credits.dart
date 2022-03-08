@@ -20,9 +20,15 @@ class RemoteGetCastCredits implements GetCastCreditsUseCase {
     try {
       final composedUrl = '$url/$personId/castcredits';
 
+      final queryParams = {
+        'embed[]': 'character',
+        'embed[]': 'show',
+      };
+
       final result = await client.request(
         url: composedUrl,
         method: RequestMethod.get,
+        queryParameters: queryParams,
       );
 
       final castCreditListResult = (result as List)

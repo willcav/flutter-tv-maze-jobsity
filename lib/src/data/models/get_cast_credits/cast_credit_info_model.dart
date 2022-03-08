@@ -1,43 +1,26 @@
+import 'package:flutter_tv_maze_jobsity/src/data/models/get_all_series/series_basic_info_model.dart';
+import 'package:flutter_tv_maze_jobsity/src/data/models/get_cast_credits/character_info_model.dart';
 import 'package:flutter_tv_maze_jobsity/src/domain/entities/get_cast_credits/cast_credit_info_entity.dart';
 
 class CastCreditInfoModel extends CastCreditInfoEntity {
-  final String dtoShowId;
-  final String dtoCharacterId;
+  final SeriesBasicInfoModel seriesInfoModel;
+  final CharacterInfoModel characterInfoModel;
 
   CastCreditInfoModel({
-    required this.dtoShowId,
-    required this.dtoCharacterId,
+    required this.seriesInfoModel,
+    required this.characterInfoModel,
   }) : super(
-          showId: dtoShowId,
-          characterId: dtoCharacterId,
+          series: seriesInfoModel,
+          character: characterInfoModel,
         );
 
-  factory CastCreditInfoModel._empty() {
-    return CastCreditInfoModel(dtoShowId: '', dtoCharacterId: '');
-  }
-
   factory CastCreditInfoModel.fromMap(Map<String, dynamic> map) {
-    if (map['_links'] == null) {
-      return CastCreditInfoModel._empty();
-    }
-
-    final showInfo = map['_links']['show']['href'];
-    final characterInfo = map['_links']['character']['href'];
+    final seriesMap = map['_embedded']['show'];
+    final characterMap = map['_embedded']['character'];
 
     return CastCreditInfoModel(
-      dtoShowId: showInfo != null ? _getIdFromHref(showInfo) : '',
-      dtoCharacterId:
-          characterInfo != null ? _getIdFromHref(characterInfo) : '',
+      seriesInfoModel: SeriesBasicInfoModel.fromMap(seriesMap ?? {}),
+      characterInfoModel: CharacterInfoModel.fromMap(characterMap ?? {}),
     );
-  }
-
-  static String _getIdFromHref(String value) {
-    if (value.isEmpty) {
-      return '';
-    }
-
-    final lastIndex = value.lastIndexOf('/');
-
-    return value.substring(lastIndex + 1);
   }
 }
