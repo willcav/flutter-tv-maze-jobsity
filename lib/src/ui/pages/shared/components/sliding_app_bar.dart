@@ -7,6 +7,7 @@ class SlidingAppBar extends StatefulWidget implements PreferredSizeWidget {
   final ScrollController scrollController;
   final void Function()? action;
   final Widget icon;
+  final bool enableAnimation;
 
   const SlidingAppBar({
     Key? key,
@@ -14,6 +15,7 @@ class SlidingAppBar extends StatefulWidget implements PreferredSizeWidget {
     required this.action,
     required this.title,
     required this.icon,
+    this.enableAnimation = true,
   }) : super(key: key);
 
   @override
@@ -53,7 +55,10 @@ class _SlidingAppBarState extends State<SlidingAppBar>
 
   @override
   Widget build(BuildContext context) {
-    _visible ? animationController.reverse() : animationController.forward();
+    if (widget.enableAnimation) {
+      _visible ? animationController.reverse() : animationController.forward();
+    }
+
     return AnimatedContainer(
       height: Tween<double>(begin: 80, end: 0)
           .animate(
