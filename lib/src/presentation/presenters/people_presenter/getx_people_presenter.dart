@@ -26,8 +26,10 @@ class GetxPeoplePresenter extends GetxController
 
   @override
   void goToPersonDetailsPage({required PersonBasicInfoEntity personEntity}) {
-    navigateToWithArgs = const NavigationArguments(
-        AppRoutes.splashPage); //TODO: Add Person Detail Page
+    navigateToWithArgs = NavigationArguments(
+      AppRoutes.personDetailsPage,
+      arguments: {'person': personEntity},
+    );
   }
 
   @override
