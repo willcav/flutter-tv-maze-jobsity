@@ -29,7 +29,7 @@ class PersonDetailsContentWidget extends StatelessWidget {
             deathday: personInfo.deathday,
           ),
           const SizedBox(
-            height: 8,
+            height: 16,
           ),
         ],
       ),

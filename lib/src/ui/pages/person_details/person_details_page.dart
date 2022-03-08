@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tv_maze_jobsity/src/domain/entities/get_cast_credits/cast_credit_info_entity.dart';
+import 'package:flutter_tv_maze_jobsity/src/ui/pages/person_details/components/cast_credit_info_widget.dart';
 import 'package:flutter_tv_maze_jobsity/src/ui/pages/person_details/components/person_details_content_widget.dart';
+import 'package:flutter_tv_maze_jobsity/src/ui/pages/shared/components/message_widget.dart';
 
 import '../../../domain/entities/search_people/person_basic_info_entity.dart';
 import '../../../presentation/presenters/person_details_presenter/person_details_presenter.dart';
@@ -29,6 +32,12 @@ class _PersonDetailsPageState extends State<PersonDetailsPage>
     controller = ScrollController();
 
     personInfo = getNavigationArguments(argumentKey: 'person');
+
+    handleNavigationWithArgs(widget.presenter.navigateToWithArgsStream);
+
+    if (personInfo != null) {
+      widget.presenter.getCastCredits(personId: personInfo!.id);
+    }
   }
 
   @override
@@ -64,37 +73,30 @@ class _PersonDetailsPageState extends State<PersonDetailsPage>
           SliverList(
               delegate: SliverChildListDelegate([
             PersonDetailsContentWidget(personInfo: personInfo!),
-            // StreamBuilder<SeriesDetailedInfoEntity?>(
-            //     stream: widget.presenter.seriesDetailsStream,
-            //     builder: (context, streamSnapshot) {
-            //       if (streamSnapshot.hasData && streamSnapshot.data != null) {
-            //         return Column(
-            //           children: [
-            //             SeriesDetailsContent(
-            //               seriesDetails: streamSnapshot.data!,
-            //             ),
-            //             SeasonsInfoWidget(
-            //               seasons: streamSnapshot.data!.seasons,
-            //               episodeOnTapAction:
-            //                   widget.presenter.goToEpisodeDetailsPage,
-            //             ),
-            //           ],
-            //         );
-            //       } else if (streamSnapshot.hasError) {
-            //         return const Padding(
-            //           padding: EdgeInsets.all(64),
-            //           child: Center(
-            //             child: Text('Something Wrong Happened'),
-            //           ),
-            //         );
-            //       }
-            //       return const Padding(
-            //         padding: EdgeInsets.all(64),
-            //         child: Center(
-            //           child: CircularProgressIndicator(),
-            //         ),
-            //       );
-            //     })
+            StreamBuilder<List<CastCreditInfoEntity>>(
+                stream: widget.presenter.castCreditListStream,
+                builder: (context, streamSnapshot) {
+                  if (streamSnapshot.hasData &&
+                      streamSnapshot.data!.isNotEmpty) {
+                    return CastCreditInfoWidget(
+                      castCreditList: streamSnapshot.data!,
+                      onTap: widget.presenter.goToSeriesDetailsPage,
+                    );
+                  } else if (streamSnapshot.hasData &&
+                      streamSnapshot.data!.isEmpty) {
+                    return const MessageWidget(
+                        message: 'No filmography available');
+                  } else if (streamSnapshot.hasError) {
+                    return const MessageWidget(
+                        message: 'Something Wrong Happened');
+                  }
+                  return const Padding(
+                    padding: EdgeInsets.all(64),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                })
           ])),
         ],
       ),

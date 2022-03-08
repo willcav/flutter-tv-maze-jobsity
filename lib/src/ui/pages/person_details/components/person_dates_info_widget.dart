@@ -13,18 +13,45 @@ class PersonDatesInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          _formatDate(birthday),
-          style: Theme.of(context).textTheme.bodyText1,
+        Text.rich(
+          TextSpan(
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1!
+                .copyWith(fontWeight: FontWeight.w700),
+            children: [
+              const TextSpan(text: 'Born'),
+              const TextSpan(
+                text: '  ·  ',
+              ),
+              TextSpan(
+                  text: _formatDate(birthday),
+                  style: Theme.of(context).textTheme.bodyText1),
+            ],
+          ),
         ),
         const SizedBox(
           height: 8,
         ),
         deathday.isNotEmpty
-            ? Text(
-                _formatDate(deathday),
-                style: Theme.of(context).textTheme.bodyText1,
+            ? Text.rich(
+                TextSpan(
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1!
+                      .copyWith(fontWeight: FontWeight.w700),
+                  children: [
+                    const TextSpan(text: 'Died'),
+                    const TextSpan(
+                      text: '  ·  ',
+                    ),
+                    TextSpan(
+                        text: _formatDate(deathday),
+                        style: Theme.of(context).textTheme.bodyText1),
+                  ],
+                ),
               )
             : const SizedBox(),
       ],
