@@ -29,8 +29,6 @@ class _FavoritesPageState extends State<FavoritesPage> with NavigationManager {
 
     handleNavigationWithArgs(widget.presenter.navigateToWithArgsStream);
 
-    widget.presenter.getAllFavoriteSeries();
-
     controller = ScrollController();
   }
 
@@ -48,6 +46,7 @@ class _FavoritesPageState extends State<FavoritesPage> with NavigationManager {
           title: 'Favorites',
           scrollController: controller,
           action: () {},
+          enableAnimation: false,
           icon: const Hero(
             tag: '-configIcon-',
             child: Icon(

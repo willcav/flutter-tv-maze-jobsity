@@ -27,31 +27,15 @@ class _SplashPageState extends State<SplashPage> with NavigationManager {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Spacer(),
-          Lottie.asset('assets/animations/retro-tv.json',
+        backgroundColor: AppColors.primary,
+        body: Center(
+          child: Lottie.asset('assets/animations/retro-tv.json',
               onLoaded: (comp) async {
             Future.delayed(
               Duration(seconds: comp.duration.inSeconds ~/ 2),
               widget.presenter.goToMainPage,
             );
           }),
-          const Spacer(),
-          Text(
-            'Welcome',
-            style: Theme.of(context)
-                .textTheme
-                .headline1!
-                .copyWith(color: AppColors.white),
-          ),
-          const SizedBox(
-            height: 24,
-          )
-        ],
-      ),
-    );
+        ));
   }
 }

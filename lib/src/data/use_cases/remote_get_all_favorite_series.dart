@@ -30,7 +30,7 @@ class RemoteGetAllFavoriteSeries implements GetAllFavoriteSeriesUseCase {
         favoriteSeriesList.add(result);
       }
 
-      return favoriteSeriesList;
+      return favoriteSeriesList..sort((a, b) => a.name.compareTo(b.name));
     } on DomainError {
       rethrow;
     }
