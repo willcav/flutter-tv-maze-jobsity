@@ -1,4 +1,6 @@
 import 'package:flutter_tv_maze_jobsity/src/dependency_injection/factories/cache/save_string_list_data_storage_factory.dart';
+import 'package:flutter_tv_maze_jobsity/src/dependency_injection/factories/presenters/getx_people_presenter_factory.dart';
+import 'package:flutter_tv_maze_jobsity/src/presentation/presenters/people_presenter/people_presenter.dart';
 import 'package:get_it/get_it.dart';
 
 import '../data/cache/delete_string_list_data_storage.dart';
@@ -69,6 +71,8 @@ void _initPresenters() {
 
   serviceLocator
       .registerFactory<FavoritesPresenter>(makeGetxFavoritesPresenter);
+
+  serviceLocator.registerFactory<PeoplePresenter>(makeGetxPeoplePresenter);
 }
 
 /// Initialize all Use Cases
