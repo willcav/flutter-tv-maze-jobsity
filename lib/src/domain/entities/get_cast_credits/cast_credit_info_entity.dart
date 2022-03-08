@@ -1,9 +1,12 @@
+import '../get_all_series/series_basic_info_entity.dart';
+import 'character_info_entity.dart';
+
 class CastCreditInfoEntity {
-  final String showId;
-  final String characterId;
+  final SeriesBasicInfoEntity series;
+  final CharacterInfoEntity character;
 
   const CastCreditInfoEntity({
-    required this.showId,
-    required this.characterId,
+    required this.series,
+    required this.character,
   });
 }
