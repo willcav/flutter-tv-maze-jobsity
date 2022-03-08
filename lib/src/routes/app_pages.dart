@@ -1,9 +1,9 @@
-import 'package:flutter_tv_maze_jobsity/src/dependency_injection/factories/pages/person_details_page_factory.dart';
 import 'package:get/get.dart';
 
-import '../dependency_injection/factories/pages/search_series_page_factory.dart';
 import '../dependency_injection/factories/pages/episode_details_page_factory.dart';
 import '../dependency_injection/factories/pages/main_navigation_page_factory.dart';
+import '../dependency_injection/factories/pages/person_details_page_factory.dart';
+import '../dependency_injection/factories/pages/search_series_page_factory.dart';
 import '../dependency_injection/factories/pages/series_details_page_factory.dart';
 import '../dependency_injection/factories/pages/splash_page_factory.dart';
 import 'app_routes.dart';

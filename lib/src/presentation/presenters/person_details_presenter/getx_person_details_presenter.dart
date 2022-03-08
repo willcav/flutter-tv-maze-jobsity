@@ -1,13 +1,13 @@
+import 'package:get/get.dart';
+
 import '../../../domain/entities/get_all_series/series_basic_info_entity.dart';
 import '../../../domain/entities/get_cast_credits/cast_credit_info_entity.dart';
 import '../../../domain/errors/domain_error.dart';
 import '../../../domain/use_cases/get_cast_credits/get_cast_credits_use_case.dart';
+import '../../../routes/app_routes.dart';
 import '../../mixins/navigation_manager/navigation_arguments.dart';
-import 'package:flutter_tv_maze_jobsity/src/routes/app_routes.dart';
-
 import '../../mixins/navigation_manager/presenter_navigation_manager.dart';
 import 'person_details_presenter.dart';
-import 'package:get/get.dart';
 
 class GetxPersonDetailsPresenter extends GetxController
     with PresenterNavigationManager

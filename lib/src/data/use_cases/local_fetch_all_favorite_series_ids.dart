@@ -1,7 +1,6 @@
-import 'package:flutter_tv_maze_jobsity/src/data/cache/cache_error.dart';
-
-import '../cache/fetch_string_list_data_storage.dart';
 import '../../domain/use_cases/fetch_all_favorite_series_ids/fetch_all_favorite_series_ids_use_case.dart';
+import '../cache/cache_error.dart';
+import '../cache/fetch_string_list_data_storage.dart';
 
 class LocalFetchAllFavoriteSeriesIds
     implements FetchAllFavoriteSeriesIdsUseCase {

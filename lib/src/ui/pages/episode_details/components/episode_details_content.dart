@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../domain/entities/core/episode_entity.dart';
-import 'episode_number_info_widget.dart';
 
+import '../../../../domain/entities/core/episode_entity.dart';
 import '../../shared/components/summary_widget.dart';
+import 'episode_number_info_widget.dart';
 
 class EpisodeDetailsContent extends StatelessWidget {
   final EpisodeEntity episode;

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tv_maze_jobsity/src/ui/mixins/navigation_manager.dart';
 
 import '../../../domain/entities/core/episode_entity.dart';
-import 'components/episode_details_content.dart';
-
+import '../../mixins/navigation_manager.dart';
 import '../../themes/app_colors.dart';
 import '../series_details/components/series_details_sliding_app_bar.dart';
 import '../shared/components/image_widget.dart';
+import 'components/episode_details_content.dart';
 
 class EpisodeDetailsPage extends StatefulWidget {
   const EpisodeDetailsPage({

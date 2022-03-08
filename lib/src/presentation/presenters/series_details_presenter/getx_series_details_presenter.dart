@@ -7,11 +7,11 @@ import '../../../domain/use_cases/check_if_series_is_favorite/check_if_series_is
 import '../../../domain/use_cases/delete_favorite_series_id/delete_favorite_series_id_use_case.dart';
 import '../../../domain/use_cases/fetch_series_details/fetch_series_details_use_case.dart';
 import '../../../domain/use_cases/save_favorite_series_id/save_favorite_series_id_use_case.dart';
+import '../../../routes/app_routes.dart';
 import '../../mixins/loading_manager.dart';
+import '../../mixins/navigation_manager/navigation_arguments.dart';
 import '../../mixins/navigation_manager/presenter_navigation_manager.dart';
 import 'series_details_presenter.dart';
-import '../../../routes/app_routes.dart';
-import '../../mixins/navigation_manager/navigation_arguments.dart';
 
 class GetxSeriesDetailsPresenter extends GetxController
     with PresenterNavigationManager, LoadingManager

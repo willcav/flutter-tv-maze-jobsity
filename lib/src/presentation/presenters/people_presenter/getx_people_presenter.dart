@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
 
+import '../../../domain/entities/search_people/person_basic_info_entity.dart';
+import '../../../domain/errors/domain_error.dart';
 import '../../../domain/use_cases/search_people/search_people_by_name_use_case.dart';
+import '../../../routes/app_routes.dart';
 import '../../mixins/loading_manager.dart';
 import '../../mixins/navigation_manager/navigation_arguments.dart';
 import '../../mixins/navigation_manager/presenter_navigation_manager.dart';
 import 'people_presenter.dart';
-import '../../../routes/app_routes.dart';
-import '../../../domain/entities/search_people/person_basic_info_entity.dart';
-import '../../../domain/errors/domain_error.dart';
 
 class GetxPeoplePresenter extends GetxController
     with LoadingManager, PresenterNavigationManager

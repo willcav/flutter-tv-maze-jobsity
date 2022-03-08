@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../../../domain/entities/get_all_series/series_basic_info_entity.dart';
 import '../../../presentation/presenters/favorites_presenter/favorites_presenter.dart';
 import '../../../routes/app_routes.dart';
 import '../../mixins/navigation_manager.dart';
-import '../../../domain/entities/get_all_series/series_basic_info_entity.dart';
 import '../../themes/app_colors.dart';
-import '../shared/components/sliding_app_bar.dart';
 import '../shared/components/message_widget.dart';
 import '../shared/components/series_card.dart';
+import '../shared/components/sliding_app_bar.dart';
 
 class FavoritesPage extends StatefulWidget {
   final FavoritesPresenter presenter;

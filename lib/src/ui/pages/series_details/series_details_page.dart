@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tv_maze_jobsity/src/ui/mixins/navigation_manager.dart';
-import 'package:flutter_tv_maze_jobsity/src/ui/pages/series_details/components/series_details_featured_image_widget.dart';
 
+import '../../../domain/entities/get_all_series/series_basic_info_entity.dart';
+import '../../../domain/entities/get_series_details/series_detailed_info_entity.dart';
 import '../../../presentation/presenters/series_details_presenter/series_details_presenter.dart';
+import '../../mixins/navigation_manager.dart';
+import '../../themes/app_colors.dart';
 import 'components/seasons_info_widget.dart';
 import 'components/series_details_content.dart';
+import 'components/series_details_featured_image_widget.dart';
 import 'components/series_details_sliding_app_bar.dart';
-
-import '../../../domain/entities/get_series_details/series_detailed_info_entity.dart';
-import '../../../domain/entities/get_all_series/series_basic_info_entity.dart';
-import '../../themes/app_colors.dart';
 
 class SeriesDetailsPage extends StatefulWidget {
   final SeriesDetailsPresenter presenter;
