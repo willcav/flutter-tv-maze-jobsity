@@ -27,7 +27,7 @@ class ScheduleInfoWidget extends StatelessWidget {
           ...schedule.days
               .map(
                 (item) => TextSpan(
-                  text: item,
+                  text: '$item, ',
                 ),
               )
               .toList(),
