@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_tv_maze_jobsity/src/ui/mixins/navigation_manager.dart';
 import 'package:flutter_tv_maze_jobsity/src/ui/pages/people/components/search_people_app_bar.dart';
 
+import '../../../domain/entities/search_people/person_basic_info_entity.dart';
 import '../../../presentation/presenters/people_presenter/people_presenter.dart';
-import '../../../domain/entities/get_all_series/series_basic_info_entity.dart';
 import '../../themes/app_colors.dart';
 import '../shared/components/message_widget.dart';
-import '../shared/components/series_card.dart';
+import 'components/person_card.dart';
 
 class PeoplePage extends StatefulWidget {
   final PeoplePresenter presenter;
@@ -19,13 +20,15 @@ class PeoplePage extends StatefulWidget {
   State<PeoplePage> createState() => _PeoplePageState();
 }
 
-class _PeoplePageState extends State<PeoplePage> {
+class _PeoplePageState extends State<PeoplePage> with NavigationManager {
   late final ScrollController controller;
 
   @override
   void initState() {
     super.initState();
     controller = ScrollController();
+
+    handleNavigationWithArgs(widget.presenter.navigateToWithArgsStream);
   }
 
   @override
@@ -34,11 +37,11 @@ class _PeoplePageState extends State<PeoplePage> {
         backgroundColor: AppColors.grey,
         appBar: SearchPeopleAppBar(
           controller: controller,
-          onChanged: (_) {},
+          onChanged: widget.presenter.searchPeople,
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: StreamBuilder<List<SeriesBasicInfoEntity>>(
+          child: StreamBuilder<List<PersonBasicInfoEntity>>(
               initialData: const [],
               stream: widget.presenter.peopleListStream,
               builder: (context, listSnapshot) {
@@ -80,7 +83,7 @@ class _PeoplePageState extends State<PeoplePage> {
 
   Widget buildList(
       {required ScrollController controller,
-      required List<SeriesBasicInfoEntity> list}) {
+      required List<PersonBasicInfoEntity> list}) {
     return RepaintBoundary(
       child: MasonryGridView.count(
         controller: controller,
@@ -90,15 +93,13 @@ class _PeoplePageState extends State<PeoplePage> {
         crossAxisSpacing: 16,
         itemCount: list.length,
         itemBuilder: (context, index) {
-          return SeriesCard(
-              key: ValueKey(index),
-              heroTag: 'people${list[index].id}',
-              index: index,
-              seriesInfoItem: list[index],
-              onTap: (
-                  {required SeriesBasicInfoEntity
-                      seriesEntity}) {} //widget.presenter.goToSeriesDetailsPage,
-              );
+          return PersonCard(
+            key: ValueKey(index),
+            heroTag: 'people${list[index].id}',
+            index: index,
+            personInfoItem: list[index],
+            onTap: widget.presenter.goToPersonDetailsPage,
+          );
         },
       ),
     );
