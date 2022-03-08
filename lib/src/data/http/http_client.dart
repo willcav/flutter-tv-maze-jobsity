@@ -1,3 +1,6 @@
+/// Http Client
+///
+/// Interface Responsible for Defining our Http Contract.
 abstract class HttpClient {
   Future request({
     required String url,
@@ -8,6 +11,7 @@ abstract class HttpClient {
   });
 }
 
+/// Request Method Type
 enum RequestMethod {
   get,
   put,

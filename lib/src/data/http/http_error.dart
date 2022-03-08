@@ -1,6 +1,9 @@
 import '../../base/errors/errors.dart';
 import '../../domain/errors/domain_error.dart';
 
+/// Base Class for Http Exception Handling
+///
+/// This Class Extends our Base Exception Class - DomainError
 abstract class HttpError extends DomainError {
   const HttpError._({String message = ''}) : super(message: message);
 
@@ -70,7 +73,7 @@ class _ServerError extends HttpError {
 }
 
 extension ConvertToBaseError on HttpError {
-  /// Convert HttpError to BaseError equivalent
+  /// Convert HttpError to BaseError Equivalent
   DomainError convertError() {
     switch (runtimeType) {
       case _BadRequest:
