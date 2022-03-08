@@ -1,3 +1,4 @@
+import 'package:flutter_tv_maze_jobsity/src/dependency_injection/factories/pages/person_details_page_factory.dart';
 import 'package:get/get.dart';
 
 import '../dependency_injection/factories/pages/search_series_page_factory.dart';
@@ -16,5 +17,6 @@ class AppPages {
     GetPage(name: AppRoutes.seriesDetailsPage, page: makeSeriesDetailsPage),
     GetPage(name: AppRoutes.episodeDetailsPage, page: makeEpisodeDetailsPage),
     GetPage(name: AppRoutes.searchSeriesPage, page: makeSearchSeriesPage),
+    GetPage(name: AppRoutes.personDetailsPage, page: makePersonDetailsPage),
   ];
 }

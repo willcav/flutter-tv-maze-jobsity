@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_tv_maze_jobsity/src/presentation/presenters/favorites_presenter/favorites_presenter.dart';
-import 'package:flutter_tv_maze_jobsity/src/routes/app_routes.dart';
-import 'package:flutter_tv_maze_jobsity/src/ui/mixins/navigation_manager.dart';
 
+import '../../../presentation/presenters/favorites_presenter/favorites_presenter.dart';
+import '../../../routes/app_routes.dart';
+import '../../mixins/navigation_manager.dart';
 import '../../../domain/entities/get_all_series/series_basic_info_entity.dart';
 import '../../themes/app_colors.dart';
 import '../shared/components/sliding_app_bar.dart';
@@ -43,18 +43,19 @@ class _FavoritesPageState extends State<FavoritesPage> with NavigationManager {
     return Scaffold(
         backgroundColor: AppColors.grey,
         appBar: SlidingAppBar(
-          title: 'Favorites',
-          scrollController: controller,
-          action: () {},
-          enableAnimation: false,
-          icon: const Hero(
-            tag: '-configIcon-',
-            child: Icon(
-              Icons.lock_open_outlined,
-              color: AppColors.black,
+            title: 'Favorites',
+            scrollController: controller,
+            action: null,
+            enableAnimation: false,
+            icon: const SizedBox()
+            // const Hero(
+            //   tag: '-configIcon-',
+            //   child: Icon(
+            //     Icons.lock_open_outlined,
+            //     color: AppColors.black,
+            //   ),
+            // ),
             ),
-          ),
-        ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: FutureBuilder(

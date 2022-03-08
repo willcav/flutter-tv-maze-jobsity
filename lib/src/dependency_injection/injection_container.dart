@@ -1,6 +1,16 @@
-import 'package:flutter_tv_maze_jobsity/src/dependency_injection/factories/cache/save_string_list_data_storage_factory.dart';
+import 'package:flutter_tv_maze_jobsity/src/dependency_injection/factories/presenters/getx_person_details_presenter_factory.dart';
+import 'package:flutter_tv_maze_jobsity/src/dependency_injection/factories/use_cases/remote_get_cast_credits_factory.dart';
+import 'package:flutter_tv_maze_jobsity/src/dependency_injection/factories/use_cases/remote_get_character_details_factory.dart';
+import 'package:flutter_tv_maze_jobsity/src/dependency_injection/factories/use_cases/remote_search_people_by_name_factory.dart';
 import 'package:get_it/get_it.dart';
 
+import '../domain/use_cases/get_cast_credits/get_cast_credits_use_case.dart';
+import '../domain/use_cases/get_character_details/get_character_details_use_case.dart';
+import '../domain/use_cases/search_people/search_people_by_name_use_case.dart';
+import '../presentation/presenters/person_details_presenter/person_details_presenter.dart';
+import 'factories/cache/save_string_list_data_storage_factory.dart';
+import 'factories/presenters/getx_people_presenter_factory.dart';
+import '../presentation/presenters/people_presenter/people_presenter.dart';
 import '../data/cache/delete_string_list_data_storage.dart';
 import '../data/cache/fetch_string_list_data_storage.dart';
 import '../data/cache/save_string_list_data_storage.dart';
@@ -41,6 +51,9 @@ import 'factories/use_cases/remote_search_series_by_name_factory.dart';
 
 final serviceLocator = GetIt.instance;
 
+/// Initializes the Service Locator
+///
+/// Responsible for instantiating all classes that will be used in dependency injection
 Future<void> init() async {
   // Presenters
   _initPresenters();
@@ -52,7 +65,7 @@ Future<void> init() async {
   _initAdapters();
 }
 
-/// Initialize all Presenters
+// Initialize all Presenters
 void _initPresenters() {
   serviceLocator.registerFactory<HomePresenter>(makeGetxHomePresenter);
 
@@ -69,9 +82,14 @@ void _initPresenters() {
 
   serviceLocator
       .registerFactory<FavoritesPresenter>(makeGetxFavoritesPresenter);
+
+  serviceLocator.registerFactory<PeoplePresenter>(makeGetxPeoplePresenter);
+
+  serviceLocator
+      .registerFactory<PersonDetailsPresenter>(makeGetxPersonDetailsPresenter);
 }
 
-/// Initialize all Use Cases
+// Initialize all Use Cases
 void _initUseCases() {
   serviceLocator.registerLazySingleton<GetAllSeriesPaginatedUseCase>(
     makeRemoteGetAllSeriesPaginated,
@@ -108,9 +126,21 @@ void _initUseCases() {
   serviceLocator.registerLazySingleton<CheckIfSeriesIsFavoriteUseCase>(
     makeLocalCheckIfSeriesIsFavorite,
   );
+
+  serviceLocator.registerLazySingleton<GetCharacterDetailsUseCase>(
+    makeRemoteGetCharacterDetails,
+  );
+
+  serviceLocator.registerLazySingleton<GetCastCreditsUseCase>(
+    makeRemoteGetCastCredits,
+  );
+
+  serviceLocator.registerLazySingleton<SearchPeopleByNameUseCase>(
+    makeRemoteSearchPeopleByName,
+  );
 }
 
-/// Initialize all Adapters
+// Initialize all Adapters
 void _initAdapters() {
   serviceLocator.registerLazySingleton<HttpClient>(
     makeDioAdapter,
