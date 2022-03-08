@@ -1,6 +1,9 @@
 import '../../base/errors/local_error.dart';
 import '../../domain/errors/domain_error.dart';
 
+/// Base Class for Cache Exception Handling
+///
+/// This Class Extends our Base Exception Class - DomainError
 abstract class CacheError extends DomainError {
   const CacheError._({String message = ''}) : super(message: message);
 
@@ -26,7 +29,7 @@ class _FailedToDelete extends CacheError {
 }
 
 extension ConvertToBaseError on CacheError {
-  /// Convert CacheError to BaseError equivalent
+  /// Convert CacheError to BaseError Equivalent
   DomainError convertError() {
     switch (runtimeType) {
       case _FailedToSave:

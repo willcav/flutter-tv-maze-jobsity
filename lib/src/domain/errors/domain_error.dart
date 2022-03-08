@@ -1,3 +1,4 @@
+/// Base Class For Exception Handling
 abstract class DomainError implements Exception {
   final String message;
 
