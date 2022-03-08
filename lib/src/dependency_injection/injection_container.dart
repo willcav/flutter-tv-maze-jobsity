@@ -1,3 +1,4 @@
+import 'package:flutter_tv_maze_jobsity/src/dependency_injection/factories/presenters/getx_person_details_presenter_factory.dart';
 import 'package:flutter_tv_maze_jobsity/src/dependency_injection/factories/use_cases/remote_get_cast_credits_factory.dart';
 import 'package:flutter_tv_maze_jobsity/src/dependency_injection/factories/use_cases/remote_get_character_details_factory.dart';
 import 'package:flutter_tv_maze_jobsity/src/dependency_injection/factories/use_cases/remote_search_people_by_name_factory.dart';
@@ -6,6 +7,7 @@ import 'package:get_it/get_it.dart';
 import '../domain/use_cases/get_cast_credits/get_cast_credits_use_case.dart';
 import '../domain/use_cases/get_character_details/get_character_details_use_case.dart';
 import '../domain/use_cases/search_people/search_people_by_name_use_case.dart';
+import '../presentation/presenters/person_details_presenter/person_details_presenter.dart';
 import 'factories/cache/save_string_list_data_storage_factory.dart';
 import 'factories/presenters/getx_people_presenter_factory.dart';
 import '../presentation/presenters/people_presenter/people_presenter.dart';
@@ -82,6 +84,9 @@ void _initPresenters() {
       .registerFactory<FavoritesPresenter>(makeGetxFavoritesPresenter);
 
   serviceLocator.registerFactory<PeoplePresenter>(makeGetxPeoplePresenter);
+
+  serviceLocator
+      .registerFactory<PersonDetailsPresenter>(makeGetxPersonDetailsPresenter);
 }
 
 // Initialize all Use Cases
