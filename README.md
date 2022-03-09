@@ -66,7 +66,7 @@ flutter run
 
 The project structure is quite simple. The **main folders** are the **assets**, **lib** and **test folders**. The lib folder is where all the code is written and the assets folder is where we put our images, icons and other related files.
 
-[https://imgur.com/vo3i9eM](https://imgur.com/vo3i9eM)
+![project-structure](https://i.imgur.com/vo3i9eM.png)
 
 ---
 
@@ -96,7 +96,7 @@ Our Presentation Layer contains the Controllers for our view. **Controllers** or
 
 The UI layer is where our **screens** and **visual components** will be. In the case of Flutter, this is where we will have our **Widgets**.
 
-[https://imgur.com/AIMflWB](https://imgur.com/AIMflWB)
+![architecture-diagram](https://i.imgur.com/AIMflWB.png)
 
 ---
 
@@ -104,6 +104,6 @@ The UI layer is where our **screens** and **visual components** will be. In the 
 
 The **exception schema** was designed to work following the **principles of clean architecture**, where we should treat exceptions as **alternative system flows**. The exception structure diagram is available below:
 
-[https://imgur.com/T4TIMSL](https://imgur.com/T4TIMSL)
+![exception-diagram](https://i.imgur.com/T4TIMSL.png)
 
 ---
