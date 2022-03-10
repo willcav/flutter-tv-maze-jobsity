@@ -34,14 +34,20 @@ Search People by Name            |  People Details
 
 ## Table of Contents
 
-- [How to run this project](#how-to-run-this-project)
-- [Project Structure Overview](#project-structure-overview)
-- [Architecture Overview](#architecture-overview)
-    - [Domain Layer](#domain-layer)
-    - [Data Layer](#data-layer)
-    - [Presentation Layer](#presentation-layer)
-    - [UI Layer](#ui-layer)
-- [Exception Structure Overview](#exception-structure-overview)
+- [Flutter - TVMaze Jobsity](#flutter---tvmaze-jobsity)
+  - [App Overview](#app-overview)
+  - [Table of Contents](#table-of-contents)
+  - [How to run this project](#how-to-run-this-project)
+    - [FVM](#fvm)
+    - [Commands to run the project](#commands-to-run-the-project)
+  - [Project Structure Overview](#project-structure-overview)
+  - [Architecture Overview](#architecture-overview)
+  - [Domain Layer](#domain-layer)
+  - [Data Layer](#data-layer)
+  - [Infra Layer](#infra-layer)
+  - [Presentation Layer](#presentation-layer)
+  - [UI Layer](#ui-layer)
+  - [Exception Structure Overview](#exception-structure-overview)
 
 ---
 
@@ -85,9 +91,17 @@ The project structure is quite simple. The **main folders** are the **assets**, 
 
 ## Architecture Overview
 
-The main architectural concept used in the App was Clean Architecture. A multi-layer architecture that facilitates unit testing and helps us with separation of responsibilities.
+The main architectural concept used in the App was **Clean Architecture**. A multi-layer architecture that facilitates unit testing and helps us with separation of responsibilities. Another objective of this architecture is to facilitate the scalability of the App with new features.
 
-The functions of each layer are described in the sections below.
+The functions of each layer are described in the following sections below.
+
+The project makes use of some **Design Patterns** such as:
+
+- **Singleton and Factory** - Creational Patterns
+- **Adapter and Decorator** - Structural Patterns
+- **Strategy** - Behavioral Pattern
+
+Other good practices present in the project are Clean Code for more descriptive nomenclature and the SOLID principles.
 
 ## Domain Layer
 
