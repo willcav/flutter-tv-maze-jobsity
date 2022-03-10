@@ -42,6 +42,9 @@ Search People by Name            |  People Details
     - [Commands to run the project](#commands-to-run-the-project)
   - [Project Structure Overview](#project-structure-overview)
   - [Architecture Overview](#architecture-overview)
+    - [Dependency Injection](#dependency-injection)
+    - [Design Patterns](#design-patterns)
+    - [SOLID Principles](#solid-principles)
   - [Domain Layer](#domain-layer)
   - [Data Layer](#data-layer)
   - [Infra Layer](#infra-layer)
@@ -95,12 +98,19 @@ The main architectural concept used in the App was **Clean Architecture**. A mul
 
 The functions of each layer are described in the following sections below.
 
+### Dependency Injection
+The project uses the *get_it* package to facilitate the organization of **dependency injection**. Control is done by the injection container.
+
+
+
+### Design Patterns
 The project makes use of some **Design Patterns** such as:
 
 - **Singleton and Factory** - Creational Patterns
 - **Adapter and Decorator** - Structural Patterns
 - **Strategy** - Behavioral Pattern
 
+### SOLID Principles
 Other good practices present in the project are Clean Code for more descriptive nomenclature and the SOLID principles.
 
 ## Domain Layer
