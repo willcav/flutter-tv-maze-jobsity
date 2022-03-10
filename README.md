@@ -34,14 +34,14 @@ Search People by Name            |  People Details
 
 ## Table of Contents
 
-- How to run this project
-- Project Structure Overview
-- Architecture Overview
-    - Domain Layer
-    - Data Layer
-    - Presentation Layer
-    - UI Layer
-- Exception Structure Overview
+- [How to run this project](#how-to-run-this-project)
+- [Project Structure Overview](#project-structure-overview)
+- [Architecture Overview](#architecture-overview)
+    - [Domain Layer](#domain-layer)
+    - [Data Layer](#data-layer)
+    - [Presentation Layer](#presentation-layer)
+    - [UI Layer](#ui-layer)
+- [Exception Structure Overview](#exception-structure-overview)
 
 ---
 
@@ -108,6 +108,8 @@ Our Presentation Layer contains the Controllers for our view. **Controllers** or
 ## UI Layer
 
 The UI layer is where our **screens** and **visual components** will be. In the case of Flutter, this is where we will have our **Widgets**.
+
+The Architecture Diagram is available below:
 
 ![architecture-diagram](https://i.imgur.com/AIMflWB.png)
 
