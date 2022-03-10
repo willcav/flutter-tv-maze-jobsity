@@ -41,6 +41,7 @@ Search People by Name            |  People Details
     - [FVM](#fvm)
     - [Commands to run the project](#commands-to-run-the-project)
   - [Project Structure Overview](#project-structure-overview)
+    - [Gitflow](#gitflow)
   - [Architecture Overview](#architecture-overview)
     - [Dependency Injection](#dependency-injection)
     - [Design Patterns](#design-patterns)
@@ -85,6 +86,9 @@ flutter run
 ---
 
 ## Project Structure Overview
+
+### Gitflow
+I used Gitflow as a strategy to manage branches.
 
 The project structure is quite simple. The **main folders** are the **assets**, **lib** and **test folders**. The lib folder is where all the code is written and the assets folder is where we put our images, icons and other related files.
 
