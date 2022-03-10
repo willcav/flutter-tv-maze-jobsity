@@ -17,6 +17,19 @@ The current **Features** Available on the App are listed below:
 - User can delete a series from the favorite list.
 - User can browse their favorite series in alphabetical order, and click to see its details.
 
+## App Overview
+Show Details             |  Episode Details
+:-------------------------:|:-------------------------:
+<img src="https://i.imgur.com/AHYCjMr.png" width="250">  |  <img src="https://i.imgur.com/tDI7Avf.png" width="250">
+
+Search Show by Name             |  Favorites List
+:-------------------------:|:-------------------------:
+<img src="https://i.imgur.com/G0Jp7fF.png" width="250">  |  <img src="https://i.imgur.com/ZGulB0h.png" width="250">
+
+Search People by Name            |  People Details
+:-------------------------:|:-------------------------:
+<img src="https://i.imgur.com/Oa8LR4p.png" width="250">  |  <img src="https://i.imgur.com/PC0wDE9.png" width="250">
+
 ---
 
 ## Table of Contents
