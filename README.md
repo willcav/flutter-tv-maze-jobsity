@@ -10,7 +10,7 @@ You can find the API [here](https://www.tvmaze.com/api).
 The current **Features** Available on the App are listed below:
 
 - List All Series contained in the API used by the paging scheme provided by the API.
-- Users can to Search Series by Name.
+- Users can Search Series by Name.
 - After clicking on a Series, the App shows the details of th Series.
 - After clicking on an episode, the App shows episode’s information.
 - User can save a series as favorite.
